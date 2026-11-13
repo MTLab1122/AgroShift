@@ -1,0 +1,299 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agroshift.incir.internal/schemas/climate.schema.json",
+  "title": "ClimateSummary",
+  "description": "Canonical contract for normalized NASA Earth Observation and Climate Data Engine outputs in AgroShift (Module 02).",
+  "type": "object",
+  "required": [
+    "farm_id",
+    "source",
+    "product_or_dataset",
+    "latitude",
+    "longitude",
+    "start_date",
+    "end_date",
+    "parameters",
+    "aggregates",
+    "missing_data",
+    "retrieved_at",
+    "coverage_note"
+  ],
+  "properties": {
+    "farm_id": {
+      "type": "string",
+      "description": "Unique identifier of the farm from Module 01 FarmProfile.",
+      "minLength": 1
+    },
+    "source": {
+      "type": "string",
+      "description": "Originating source organization or API (e.g., NASA POWER API).",
+      "enum": ["NASA POWER Daily API", "NASA POWER Daily API (Mock)", "NASA POWER", "NASA EarthData"]
+    },
+    "product_or_dataset": {
+      "type": "string",
+      "description": "Underlying satellite, model, or reanalysis product (e.g., MERRA-2 / GEOS-5 FP-IT / CERES SYN1deg via POWER AG community)."
+    },
+    "latitude": {
+      "type": "number",
+      "description": "Latitude coordinate in decimal degrees (-90 to 90).",
+      "minimum": -90.0,
+      "maximum": 90.0
+    },
+    "longitude": {
+      "type": "number",
+      "description": "Longitude coordinate in decimal degrees (-180 to 180).",
+      "minimum": -180.0,
+      "maximum": 180.0
+    },
+    "start_date": {
+      "type": "string",
+      "description": "Start of observed window in ISO format (YYYY-MM-DD).",
+      "format": "date"
+    },
+    "end_date": {
+      "type": "string",
+      "description": "End of observed window in ISO format (YYYY-MM-DD).",
+      "format": "date"
+    },
+    "parameters": {
+      "type": "array",
+      "description": "List of environmental parameters included with exact codes, human labels, and SI/agricultural units.",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/ParameterMetadata"
+      }
+    },
+    "daily_series": {
+      "type": "array",
+      "description": "Optional chronological daily observation records for detailed charting and time-series analysis.",
+      "items": {
+        "$ref": "#/$defs/DailyRecord"
+      }
+    },
+    "aggregates": {
+      "$ref": "#/$defs/AggregatesSummary"
+    },
+    "missing_data": {
+      "$ref": "#/$defs/MissingDataSummary"
+    },
+    "retrieved_at": {
+      "type": "string",
+      "description": "ISO 8601 UTC timestamp of when data was retrieved or synthesized.",
+      "format": "date-time"
+    },
+    "coverage_note": {
+      "type": "string",
+      "description": "Explicit provenance disclosure clarifying that data represents regional satellite/reanalysis grid cells rather than on-farm sensors.",
+      "minLength": 20
+    },
+    "is_demo_data": {
+      "type": "boolean",
+      "description": "Flag indicating if the summary was generated from synthetic/mock fixtures rather than live NASA API calls.",
+      "default": false
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "ParameterMetadata": {
+      "type": "object",
+      "required": ["code", "label", "unit"],
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Exact NASA POWER parameter identifier (e.g., T2M, PRECTOTCORR, RH2M, ALLSKY_SFC_SW_DWN).",
+          "enum": ["T2M", "T2M_MIN", "T2M_MAX", "PRECTOTCORR", "RH2M", "ALLSKY_SFC_SW_DWN"]
+        },
+        "label": {
+          "type": "string",
+          "description": "Descriptive human-readable name of the parameter."
+        },
+        "unit": {
+          "type": "string",
+          "description": "Official standard unit of measurement (e.g., °C, mm/day, %, MJ/m^2/day)."
+        }
+      },
+      "additionalProperties": false
+    },
+    "DailyRecord": {
+      "type": "object",
+      "required": ["date", "values"],
+      "properties": {
+        "date": {
+          "type": "string",
+          "description": "Observation date in YYYY-MM-DD format.",
+          "format": "date"
+        },
+        "values": {
+          "type": "object",
+          "description": "Parameter code to numeric value mapping. Unobserved or missing values must be null (never 0 or fabricated).",
+          "additionalProperties": {
+            "type": ["number", "null"]
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "AggregatesSummary": {
+      "type": "object",
+      "required": ["monthly", "seasonal"],
+      "properties": {
+        "monthly": {
+          "type": "array",
+          "description": "Calendar month aggregated statistics.",
+          "items": {
+            "$ref": "#/$defs/MonthlyAggregate"
+          }
+        },
+        "seasonal": {
+          "type": "array",
+          "description": "Agro-ecological season aggregated statistics (e.g. Kharif, Rabi).",
+          "items": {
+            "$ref": "#/$defs/SeasonalAggregate"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "MonthlyAggregate": {
+      "type": "object",
+      "required": ["period", "aggregation_method", "total_days", "valid_days", "values"],
+      "properties": {
+        "period": {
+          "type": "string",
+          "description": "Year-Month identifier in YYYY-MM format.",
+          "pattern": "^\\d{4}-(0[1-9]|1[0-2])$"
+        },
+        "aggregation_method": {
+          "type": "string",
+          "description": "Method of aggregation applied (e.g., mean for T2M, sum for PRECTOTCORR)."
+        },
+        "total_days": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "valid_days": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "coverage_ratio": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0
+        },
+        "values": {
+          "type": "object",
+          "description": "Metric values per parameter (mean, sum, min, max).",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "mean": { "type": ["number", "null"] },
+              "sum": { "type": ["number", "null"] },
+              "min": { "type": ["number", "null"] },
+              "max": { "type": ["number", "null"] },
+              "unit": { "type": "string" }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "SeasonalAggregate": {
+      "type": "object",
+      "required": ["season", "period", "aggregation_method", "total_days", "valid_days", "values"],
+      "properties": {
+        "season": {
+          "type": "string",
+          "description": "Season name (e.g., Kharif, Rabi, Spring, Annual)."
+        },
+        "period": {
+          "type": "string",
+          "description": "Date range span of season (e.g., 2024-05 to 2024-10)."
+        },
+        "aggregation_method": {
+          "type": "string",
+          "description": "Method of aggregation applied across the seasonal window."
+        },
+        "total_days": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "valid_days": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "coverage_ratio": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0
+        },
+        "values": {
+          "type": "object",
+          "description": "Aggregated metrics for the season.",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "mean": { "type": ["number", "null"] },
+              "sum": { "type": ["number", "null"] },
+              "min": { "type": ["number", "null"] },
+              "max": { "type": ["number", "null"] },
+              "unit": { "type": "string" }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "MissingDataSummary": {
+      "type": "object",
+      "required": ["total_days", "missing_days_by_parameter", "has_gaps"],
+      "properties": {
+        "total_days": {
+          "type": "integer",
+          "description": "Total calendar days spanned by start_date to end_date.",
+          "minimum": 1
+        },
+        "missing_days_by_parameter": {
+          "type": "object",
+          "description": "Count of missing observations (sentinel -999 mapped to null) per parameter.",
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "has_gaps": {
+          "type": "boolean",
+          "description": "True if any parameter has at least one missing observation day."
+        },
+        "notes": {
+          "type": "string",
+          "description": "Human-readable notes regarding missing data or sensor outages."
+        }
+      },
+      "additionalProperties": false
+    },
+    "ApiError": {
+      "type": "object",
+      "required": ["error_code", "message"],
+      "properties": {
+        "error_code": {
+          "type": "string",
+          "description": "Standardized uppercase error code (e.g. INVALID_COORDINATES, UPSTREAM_TIMEOUT)."
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable description of what failed and how to remediate."
+        },
+        "details": {
+          "description": "Optional arbitrary dictionary or list providing contextual debugging clues."
+        },
+        "request_id": {
+          "type": "string",
+          "description": "Optional tracing or correlation ID for the request."
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

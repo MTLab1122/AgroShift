@@ -1,0 +1,1941 @@
+{
+  "farm_id": "farm-peshawar-001",
+  "source": "NASA POWER Daily API (Mock)",
+  "product_or_dataset": "MERRA-2 / GEOS-5 FP-IT / CERES SYN1deg via POWER AG community",
+  "latitude": 34.0151,
+  "longitude": 71.5249,
+  "start_date": "2024-05-01",
+  "end_date": "2024-10-31",
+  "parameters": [
+    {
+      "code": "T2M",
+      "label": "Temperature at 2 Meters",
+      "unit": "°C"
+    },
+    {
+      "code": "PRECTOTCORR",
+      "label": "Precipitation Corrected",
+      "unit": "mm/day"
+    },
+    {
+      "code": "RH2M",
+      "label": "Relative Humidity at 2 Meters",
+      "unit": "%"
+    },
+    {
+      "code": "ALLSKY_SFC_SW_DWN",
+      "label": "All Sky Surface Shortwave Downward Irradiance",
+      "unit": "MJ/m^2/day"
+    }
+  ],
+  "daily_series": [
+    {
+      "date": "2024-05-01",
+      "values": {
+        "T2M": 29.6,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 43.0,
+        "ALLSKY_SFC_SW_DWN": 25.4
+      }
+    },
+    {
+      "date": "2024-05-02",
+      "values": {
+        "T2M": 28.4,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 39.0,
+        "ALLSKY_SFC_SW_DWN": 24.6
+      }
+    },
+    {
+      "date": "2024-05-03",
+      "values": {
+        "T2M": 29.4,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 44.0,
+        "ALLSKY_SFC_SW_DWN": 24.9
+      }
+    },
+    {
+      "date": "2024-05-04",
+      "values": {
+        "T2M": 28.9,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 41.0,
+        "ALLSKY_SFC_SW_DWN": 24.8
+      }
+    },
+    {
+      "date": "2024-05-05",
+      "values": {
+        "T2M": 29.6,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 46.0,
+        "ALLSKY_SFC_SW_DWN": 25.3
+      }
+    },
+    {
+      "date": "2024-05-06",
+      "values": {
+        "T2M": 30.1,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 40.0,
+        "ALLSKY_SFC_SW_DWN": 25.1
+      }
+    },
+    {
+      "date": "2024-05-07",
+      "values": {
+        "T2M": 29.5,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 45.0,
+        "ALLSKY_SFC_SW_DWN": 25.4
+      }
+    },
+    {
+      "date": "2024-05-08",
+      "values": {
+        "T2M": 30.0,
+        "PRECTOTCORR": 3.5,
+        "RH2M": 39.0,
+        "ALLSKY_SFC_SW_DWN": 25.2
+      }
+    },
+    {
+      "date": "2024-05-09",
+      "values": {
+        "T2M": 29.8,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 47.0,
+        "ALLSKY_SFC_SW_DWN": 24.8
+      }
+    },
+    {
+      "date": "2024-05-10",
+      "values": {
+        "T2M": 30.6,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 42.0,
+        "ALLSKY_SFC_SW_DWN": 24.5
+      }
+    },
+    {
+      "date": "2024-05-11",
+      "values": {
+        "T2M": 31.1,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 42.0,
+        "ALLSKY_SFC_SW_DWN": 25.3
+      }
+    },
+    {
+      "date": "2024-05-12",
+      "values": {
+        "T2M": 30.6,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 39.0,
+        "ALLSKY_SFC_SW_DWN": 25.2
+      }
+    },
+    {
+      "date": "2024-05-13",
+      "values": {
+        "T2M": 31.4,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 42.0,
+        "ALLSKY_SFC_SW_DWN": 25.3
+      }
+    },
+    {
+      "date": "2024-05-14",
+      "values": {
+        "T2M": 30.3,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 41.0,
+        "ALLSKY_SFC_SW_DWN": 25.0
+      }
+    },
+    {
+      "date": "2024-05-15",
+      "values": {
+        "T2M": 31.5,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 46.0,
+        "ALLSKY_SFC_SW_DWN": 25.1
+      }
+    },
+    {
+      "date": "2024-05-16",
+      "values": {
+        "T2M": 31.1,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 49.0,
+        "ALLSKY_SFC_SW_DWN": 25.0
+      }
+    },
+    {
+      "date": "2024-05-17",
+      "values": {
+        "T2M": 31.0,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 47.0,
+        "ALLSKY_SFC_SW_DWN": 24.8
+      }
+    },
+    {
+      "date": "2024-05-18",
+      "values": {
+        "T2M": 31.1,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 43.0,
+        "ALLSKY_SFC_SW_DWN": 25.2
+      }
+    },
+    {
+      "date": "2024-05-19",
+      "values": {
+        "T2M": 32.0,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 47.0,
+        "ALLSKY_SFC_SW_DWN": 25.4
+      }
+    },
+    {
+      "date": "2024-05-20",
+      "values": {
+        "T2M": 31.9,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 45.0,
+        "ALLSKY_SFC_SW_DWN": 25.2
+      }
+    },
+    {
+      "date": "2024-05-21",
+      "values": {
+        "T2M": 31.9,
+        "PRECTOTCORR": 3.5,
+        "RH2M": 49.0,
+        "ALLSKY_SFC_SW_DWN": 25.0
+      }
+    },
+    {
+      "date": "2024-05-22",
+      "values": {
+        "T2M": 32.0,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 49.0,
+        "ALLSKY_SFC_SW_DWN": 25.0
+      }
+    },
+    {
+      "date": "2024-05-23",
+      "values": {
+        "T2M": 31.7,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 41.0,
+        "ALLSKY_SFC_SW_DWN": 25.0
+      }
+    },
+    {
+      "date": "2024-05-24",
+      "values": {
+        "T2M": 33.3,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 49.0,
+        "ALLSKY_SFC_SW_DWN": 25.4
+      }
+    },
+    {
+      "date": "2024-05-25",
+      "values": {
+        "T2M": 32.0,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 44.0,
+        "ALLSKY_SFC_SW_DWN": 24.5
+      }
+    },
+    {
+      "date": "2024-05-26",
+      "values": {
+        "T2M": 32.7,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 49.0,
+        "ALLSKY_SFC_SW_DWN": 25.0
+      }
+    },
+    {
+      "date": "2024-05-27",
+      "values": {
+        "T2M": 33.1,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 45.0,
+        "ALLSKY_SFC_SW_DWN": 25.2
+      }
+    },
+    {
+      "date": "2024-05-28",
+      "values": {
+        "T2M": 33.1,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 38.0,
+        "ALLSKY_SFC_SW_DWN": 25.1
+      }
+    },
+    {
+      "date": "2024-05-29",
+      "values": {
+        "T2M": 33.3,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 47.0,
+        "ALLSKY_SFC_SW_DWN": 24.6
+      }
+    },
+    {
+      "date": "2024-05-30",
+      "values": {
+        "T2M": 33.9,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 43.0,
+        "ALLSKY_SFC_SW_DWN": 24.6
+      }
+    },
+    {
+      "date": "2024-05-31",
+      "values": {
+        "T2M": 34.1,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 43.0,
+        "ALLSKY_SFC_SW_DWN": 24.6
+      }
+    },
+    {
+      "date": "2024-06-01",
+      "values": {
+        "T2M": 37.1,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 40.0,
+        "ALLSKY_SFC_SW_DWN": 26.8
+      }
+    },
+    {
+      "date": "2024-06-02",
+      "values": {
+        "T2M": 35.3,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 41.0,
+        "ALLSKY_SFC_SW_DWN": 26.9
+      }
+    },
+    {
+      "date": "2024-06-03",
+      "values": {
+        "T2M": 36.7,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 33.0,
+        "ALLSKY_SFC_SW_DWN": 26.4
+      }
+    },
+    {
+      "date": "2024-06-04",
+      "values": {
+        "T2M": 36.7,
+        "PRECTOTCORR": 5.0,
+        "RH2M": 33.0,
+        "ALLSKY_SFC_SW_DWN": 26.7
+      }
+    },
+    {
+      "date": "2024-06-05",
+      "values": {
+        "T2M": 35.1,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 35.0,
+        "ALLSKY_SFC_SW_DWN": 26.9
+      }
+    },
+    {
+      "date": "2024-06-06",
+      "values": {
+        "T2M": 37.3,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 46.0,
+        "ALLSKY_SFC_SW_DWN": 26.8
+      }
+    },
+    {
+      "date": "2024-06-07",
+      "values": {
+        "T2M": 36.9,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 34.0,
+        "ALLSKY_SFC_SW_DWN": 26.8
+      }
+    },
+    {
+      "date": "2024-06-08",
+      "values": {
+        "T2M": 36.3,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 46.0,
+        "ALLSKY_SFC_SW_DWN": 26.2
+      }
+    },
+    {
+      "date": "2024-06-09",
+      "values": {
+        "T2M": 36.7,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 33.0,
+        "ALLSKY_SFC_SW_DWN": 26.7
+      }
+    },
+    {
+      "date": "2024-06-10",
+      "values": {
+        "T2M": 34.9,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 39.0,
+        "ALLSKY_SFC_SW_DWN": 27.0
+      }
+    },
+    {
+      "date": "2024-06-11",
+      "values": {
+        "T2M": 35.1,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 40.0,
+        "ALLSKY_SFC_SW_DWN": 27.1
+      }
+    },
+    {
+      "date": "2024-06-12",
+      "values": {
+        "T2M": 35.9,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 44.0,
+        "ALLSKY_SFC_SW_DWN": 26.0
+      }
+    },
+    {
+      "date": "2024-06-13",
+      "values": {
+        "T2M": 35.3,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 41.0,
+        "ALLSKY_SFC_SW_DWN": 26.0
+      }
+    },
+    {
+      "date": "2024-06-14",
+      "values": {
+        "T2M": 33.5,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 42.0,
+        "ALLSKY_SFC_SW_DWN": 26.1
+      }
+    },
+    {
+      "date": "2024-06-15",
+      "values": {
+        "T2M": 34.5,
+        "PRECTOTCORR": null,
+        "RH2M": null,
+        "ALLSKY_SFC_SW_DWN": 26.7
+      }
+    },
+    {
+      "date": "2024-06-16",
+      "values": {
+        "T2M": 36.5,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 37.0,
+        "ALLSKY_SFC_SW_DWN": 26.5
+      }
+    },
+    {
+      "date": "2024-06-17",
+      "values": {
+        "T2M": 37.5,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 32.0,
+        "ALLSKY_SFC_SW_DWN": 26.9
+      }
+    },
+    {
+      "date": "2024-06-18",
+      "values": {
+        "T2M": 34.9,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 39.0,
+        "ALLSKY_SFC_SW_DWN": 27.0
+      }
+    },
+    {
+      "date": "2024-06-19",
+      "values": {
+        "T2M": 38.3,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 41.0,
+        "ALLSKY_SFC_SW_DWN": 26.0
+      }
+    },
+    {
+      "date": "2024-06-20",
+      "values": {
+        "T2M": 34.7,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 38.0,
+        "ALLSKY_SFC_SW_DWN": 26.9
+      }
+    },
+    {
+      "date": "2024-06-21",
+      "values": {
+        "T2M": 36.1,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 35.0,
+        "ALLSKY_SFC_SW_DWN": 26.3
+      }
+    },
+    {
+      "date": "2024-06-22",
+      "values": {
+        "T2M": 37.7,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 38.0,
+        "ALLSKY_SFC_SW_DWN": 26.0
+      }
+    },
+    {
+      "date": "2024-06-23",
+      "values": {
+        "T2M": 36.3,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 46.0,
+        "ALLSKY_SFC_SW_DWN": 26.5
+      }
+    },
+    {
+      "date": "2024-06-24",
+      "values": {
+        "T2M": 33.5,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 32.0,
+        "ALLSKY_SFC_SW_DWN": 26.3
+      }
+    },
+    {
+      "date": "2024-06-25",
+      "values": {
+        "T2M": 35.1,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 35.0,
+        "ALLSKY_SFC_SW_DWN": 26.9
+      }
+    },
+    {
+      "date": "2024-06-26",
+      "values": {
+        "T2M": 38.3,
+        "PRECTOTCORR": 5.0,
+        "RH2M": 41.0,
+        "ALLSKY_SFC_SW_DWN": 26.0
+      }
+    },
+    {
+      "date": "2024-06-27",
+      "values": {
+        "T2M": 34.9,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 34.0,
+        "ALLSKY_SFC_SW_DWN": 26.8
+      }
+    },
+    {
+      "date": "2024-06-28",
+      "values": {
+        "T2M": 33.7,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 33.0,
+        "ALLSKY_SFC_SW_DWN": 26.4
+      }
+    },
+    {
+      "date": "2024-06-29",
+      "values": {
+        "T2M": 37.1,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 45.0,
+        "ALLSKY_SFC_SW_DWN": 26.7
+      }
+    },
+    {
+      "date": "2024-06-30",
+      "values": {
+        "T2M": 35.3,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 41.0,
+        "ALLSKY_SFC_SW_DWN": 26.0
+      }
+    },
+    {
+      "date": "2024-07-01",
+      "values": {
+        "T2M": 32.6,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 64.0,
+        "ALLSKY_SFC_SW_DWN": 22.6
+      }
+    },
+    {
+      "date": "2024-07-02",
+      "values": {
+        "T2M": 33.9,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 77.0,
+        "ALLSKY_SFC_SW_DWN": 22.4
+      }
+    },
+    {
+      "date": "2024-07-03",
+      "values": {
+        "T2M": 32.6,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 64.0,
+        "ALLSKY_SFC_SW_DWN": 22.6
+      }
+    },
+    {
+      "date": "2024-07-04",
+      "values": {
+        "T2M": 32.4,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 62.0,
+        "ALLSKY_SFC_SW_DWN": 22.9
+      }
+    },
+    {
+      "date": "2024-07-05",
+      "values": {
+        "T2M": 33.5,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 73.0,
+        "ALLSKY_SFC_SW_DWN": 22.5
+      }
+    },
+    {
+      "date": "2024-07-06",
+      "values": {
+        "T2M": 33.6,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 74.0,
+        "ALLSKY_SFC_SW_DWN": 22.1
+      }
+    },
+    {
+      "date": "2024-07-07",
+      "values": {
+        "T2M": 32.5,
+        "PRECTOTCORR": 16.5,
+        "RH2M": 63.0,
+        "ALLSKY_SFC_SW_DWN": 22.5
+      }
+    },
+    {
+      "date": "2024-07-08",
+      "values": {
+        "T2M": 32.3,
+        "PRECTOTCORR": 2.0,
+        "RH2M": 61.0,
+        "ALLSKY_SFC_SW_DWN": 22.3
+      }
+    },
+    {
+      "date": "2024-07-09",
+      "values": {
+        "T2M": 33.6,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 74.0,
+        "ALLSKY_SFC_SW_DWN": 22.1
+      }
+    },
+    {
+      "date": "2024-07-10",
+      "values": {
+        "T2M": 32.1,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 59.0,
+        "ALLSKY_SFC_SW_DWN": 22.6
+      }
+    },
+    {
+      "date": "2024-07-11",
+      "values": {
+        "T2M": 33.4,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 72.0,
+        "ALLSKY_SFC_SW_DWN": 22.4
+      }
+    },
+    {
+      "date": "2024-07-12",
+      "values": {
+        "T2M": 32.5,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 63.0,
+        "ALLSKY_SFC_SW_DWN": 23.0
+      }
+    },
+    {
+      "date": "2024-07-13",
+      "values": {
+        "T2M": 33.3,
+        "PRECTOTCORR": 16.5,
+        "RH2M": 71.0,
+        "ALLSKY_SFC_SW_DWN": 23.3
+      }
+    },
+    {
+      "date": "2024-07-14",
+      "values": {
+        "T2M": 32.2,
+        "PRECTOTCORR": 2.0,
+        "RH2M": 60.0,
+        "ALLSKY_SFC_SW_DWN": 22.2
+      }
+    },
+    {
+      "date": "2024-07-15",
+      "values": {
+        "T2M": 32.1,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 59.0,
+        "ALLSKY_SFC_SW_DWN": 22.1
+      }
+    },
+    {
+      "date": "2024-07-16",
+      "values": {
+        "T2M": 32.5,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 63.0,
+        "ALLSKY_SFC_SW_DWN": 22.5
+      }
+    },
+    {
+      "date": "2024-07-17",
+      "values": {
+        "T2M": 33.1,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 69.0,
+        "ALLSKY_SFC_SW_DWN": 22.1
+      }
+    },
+    {
+      "date": "2024-07-18",
+      "values": {
+        "T2M": 32.6,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 64.0,
+        "ALLSKY_SFC_SW_DWN": 22.6
+      }
+    },
+    {
+      "date": "2024-07-19",
+      "values": {
+        "T2M": 33.1,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 69.0,
+        "ALLSKY_SFC_SW_DWN": 23.1
+      }
+    },
+    {
+      "date": "2024-07-20",
+      "values": {
+        "T2M": 32.7,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 65.0,
+        "ALLSKY_SFC_SW_DWN": 23.2
+      }
+    },
+    {
+      "date": "2024-07-21",
+      "values": {
+        "T2M": 33.2,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 70.0,
+        "ALLSKY_SFC_SW_DWN": 23.2
+      }
+    },
+    {
+      "date": "2024-07-22",
+      "values": {
+        "T2M": 32.0,
+        "PRECTOTCORR": 16.5,
+        "RH2M": 58.0,
+        "ALLSKY_SFC_SW_DWN": 22.0
+      }
+    },
+    {
+      "date": "2024-07-23",
+      "values": {
+        "T2M": 33.4,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 72.0,
+        "ALLSKY_SFC_SW_DWN": 22.9
+      }
+    },
+    {
+      "date": "2024-07-24",
+      "values": {
+        "T2M": 33.2,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 70.0,
+        "ALLSKY_SFC_SW_DWN": 22.7
+      }
+    },
+    {
+      "date": "2024-07-25",
+      "values": {
+        "T2M": 32.5,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 63.0,
+        "ALLSKY_SFC_SW_DWN": 23.0
+      }
+    },
+    {
+      "date": "2024-07-26",
+      "values": {
+        "T2M": 33.1,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 69.0,
+        "ALLSKY_SFC_SW_DWN": 23.1
+      }
+    },
+    {
+      "date": "2024-07-27",
+      "values": {
+        "T2M": 33.5,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 73.0,
+        "ALLSKY_SFC_SW_DWN": 22.5
+      }
+    },
+    {
+      "date": "2024-07-28",
+      "values": {
+        "T2M": 32.0,
+        "PRECTOTCORR": 16.5,
+        "RH2M": 58.0,
+        "ALLSKY_SFC_SW_DWN": 23.0
+      }
+    },
+    {
+      "date": "2024-07-29",
+      "values": {
+        "T2M": 33.9,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 77.0,
+        "ALLSKY_SFC_SW_DWN": 23.4
+      }
+    },
+    {
+      "date": "2024-07-30",
+      "values": {
+        "T2M": 32.6,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 64.0,
+        "ALLSKY_SFC_SW_DWN": 23.1
+      }
+    },
+    {
+      "date": "2024-07-31",
+      "values": {
+        "T2M": 33.3,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 71.0,
+        "ALLSKY_SFC_SW_DWN": 23.3
+      }
+    },
+    {
+      "date": "2024-08-01",
+      "values": {
+        "T2M": 30.9,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 71.0,
+        "ALLSKY_SFC_SW_DWN": 20.6
+      }
+    },
+    {
+      "date": "2024-08-02",
+      "values": {
+        "T2M": 31.3,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 75.0,
+        "ALLSKY_SFC_SW_DWN": 21.0
+      }
+    },
+    {
+      "date": "2024-08-03",
+      "values": {
+        "T2M": 31.8,
+        "PRECTOTCORR": 22.0,
+        "RH2M": 80.0,
+        "ALLSKY_SFC_SW_DWN": 21.8
+      }
+    },
+    {
+      "date": "2024-08-04",
+      "values": {
+        "T2M": 30.8,
+        "PRECTOTCORR": 4.0,
+        "RH2M": 70.0,
+        "ALLSKY_SFC_SW_DWN": 20.5
+      }
+    },
+    {
+      "date": "2024-08-05",
+      "values": {
+        "T2M": 30.4,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 66.0,
+        "ALLSKY_SFC_SW_DWN": 21.3
+      }
+    },
+    {
+      "date": "2024-08-06",
+      "values": {
+        "T2M": 30.2,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 64.0,
+        "ALLSKY_SFC_SW_DWN": 20.8
+      }
+    },
+    {
+      "date": "2024-08-07",
+      "values": {
+        "T2M": 31.0,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 72.0,
+        "ALLSKY_SFC_SW_DWN": 21.0
+      }
+    },
+    {
+      "date": "2024-08-08",
+      "values": {
+        "T2M": 30.5,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 67.0,
+        "ALLSKY_SFC_SW_DWN": 21.1
+      }
+    },
+    {
+      "date": "2024-08-09",
+      "values": {
+        "T2M": 31.3,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 75.0,
+        "ALLSKY_SFC_SW_DWN": 21.9
+      }
+    },
+    {
+      "date": "2024-08-10",
+      "values": {
+        "T2M": 30.2,
+        "PRECTOTCORR": 22.0,
+        "RH2M": 64.0,
+        "ALLSKY_SFC_SW_DWN": 21.1
+      }
+    },
+    {
+      "date": "2024-08-11",
+      "values": {
+        "T2M": 30.8,
+        "PRECTOTCORR": 4.0,
+        "RH2M": 70.0,
+        "ALLSKY_SFC_SW_DWN": 21.4
+      }
+    },
+    {
+      "date": "2024-08-12",
+      "values": {
+        "T2M": 31.0,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 72.0,
+        "ALLSKY_SFC_SW_DWN": 21.0
+      }
+    },
+    {
+      "date": "2024-08-13",
+      "values": {
+        "T2M": 30.8,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 70.0,
+        "ALLSKY_SFC_SW_DWN": 21.1
+      }
+    },
+    {
+      "date": "2024-08-14",
+      "values": {
+        "T2M": 30.8,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 70.0,
+        "ALLSKY_SFC_SW_DWN": 21.1
+      }
+    },
+    {
+      "date": "2024-08-15",
+      "values": {
+        "T2M": 31.4,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 76.0,
+        "ALLSKY_SFC_SW_DWN": 21.7
+      }
+    },
+    {
+      "date": "2024-08-16",
+      "values": {
+        "T2M": 30.5,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 67.0,
+        "ALLSKY_SFC_SW_DWN": 20.5
+      }
+    },
+    {
+      "date": "2024-08-17",
+      "values": {
+        "T2M": 30.7,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 69.0,
+        "ALLSKY_SFC_SW_DWN": 21.3
+      }
+    },
+    {
+      "date": "2024-08-18",
+      "values": {
+        "T2M": 31.8,
+        "PRECTOTCORR": 22.0,
+        "RH2M": 80.0,
+        "ALLSKY_SFC_SW_DWN": 21.2
+      }
+    },
+    {
+      "date": "2024-08-19",
+      "values": {
+        "T2M": 31.8,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 80.0,
+        "ALLSKY_SFC_SW_DWN": 21.5
+      }
+    },
+    {
+      "date": "2024-08-20",
+      "values": {
+        "T2M": 31.4,
+        "PRECTOTCORR": 0.0,
+        "RH2M": null,
+        "ALLSKY_SFC_SW_DWN": 20.8
+      }
+    },
+    {
+      "date": "2024-08-21",
+      "values": {
+        "T2M": 31.3,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 75.0,
+        "ALLSKY_SFC_SW_DWN": 20.7
+      }
+    },
+    {
+      "date": "2024-08-22",
+      "values": {
+        "T2M": 31.9,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 81.0,
+        "ALLSKY_SFC_SW_DWN": 21.3
+      }
+    },
+    {
+      "date": "2024-08-23",
+      "values": {
+        "T2M": 31.5,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 77.0,
+        "ALLSKY_SFC_SW_DWN": 20.9
+      }
+    },
+    {
+      "date": "2024-08-24",
+      "values": {
+        "T2M": 31.0,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 72.0,
+        "ALLSKY_SFC_SW_DWN": 21.6
+      }
+    },
+    {
+      "date": "2024-08-25",
+      "values": {
+        "T2M": 31.7,
+        "PRECTOTCORR": 22.0,
+        "RH2M": 79.0,
+        "ALLSKY_SFC_SW_DWN": 20.5
+      }
+    },
+    {
+      "date": "2024-08-26",
+      "values": {
+        "T2M": 31.6,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 78.0,
+        "ALLSKY_SFC_SW_DWN": 21.6
+      }
+    },
+    {
+      "date": "2024-08-27",
+      "values": {
+        "T2M": 30.8,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 70.0,
+        "ALLSKY_SFC_SW_DWN": 21.1
+      }
+    },
+    {
+      "date": "2024-08-28",
+      "values": {
+        "T2M": 30.3,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 65.0,
+        "ALLSKY_SFC_SW_DWN": 21.2
+      }
+    },
+    {
+      "date": "2024-08-29",
+      "values": {
+        "T2M": 30.6,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 68.0,
+        "ALLSKY_SFC_SW_DWN": 21.8
+      }
+    },
+    {
+      "date": "2024-08-30",
+      "values": {
+        "T2M": 30.8,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 70.0,
+        "ALLSKY_SFC_SW_DWN": 21.1
+      }
+    },
+    {
+      "date": "2024-08-31",
+      "values": {
+        "T2M": 30.8,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 70.0,
+        "ALLSKY_SFC_SW_DWN": 21.1
+      }
+    },
+    {
+      "date": "2024-09-01",
+      "values": {
+        "T2M": 28.2,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 53.0,
+        "ALLSKY_SFC_SW_DWN": 19.0
+      }
+    },
+    {
+      "date": "2024-09-02",
+      "values": {
+        "T2M": 27.5,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 51.0,
+        "ALLSKY_SFC_SW_DWN": 19.1
+      }
+    },
+    {
+      "date": "2024-09-03",
+      "values": {
+        "T2M": 27.5,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 56.0,
+        "ALLSKY_SFC_SW_DWN": 19.9
+      }
+    },
+    {
+      "date": "2024-09-04",
+      "values": {
+        "T2M": 28.4,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 50.0,
+        "ALLSKY_SFC_SW_DWN": 19.6
+      }
+    },
+    {
+      "date": "2024-09-05",
+      "values": {
+        "T2M": 27.6,
+        "PRECTOTCORR": 10.0,
+        "RH2M": 52.0,
+        "ALLSKY_SFC_SW_DWN": 19.2
+      }
+    },
+    {
+      "date": "2024-09-06",
+      "values": {
+        "T2M": 28.8,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 54.0,
+        "ALLSKY_SFC_SW_DWN": 20.0
+      }
+    },
+    {
+      "date": "2024-09-07",
+      "values": {
+        "T2M": 28.4,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 60.0,
+        "ALLSKY_SFC_SW_DWN": 20.0
+      }
+    },
+    {
+      "date": "2024-09-08",
+      "values": {
+        "T2M": 28.7,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 58.0,
+        "ALLSKY_SFC_SW_DWN": 19.5
+      }
+    },
+    {
+      "date": "2024-09-09",
+      "values": {
+        "T2M": 28.2,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 63.0,
+        "ALLSKY_SFC_SW_DWN": 19.4
+      }
+    },
+    {
+      "date": "2024-09-10",
+      "values": {
+        "T2M": 29.2,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 63.0,
+        "ALLSKY_SFC_SW_DWN": 20.0
+      }
+    },
+    {
+      "date": "2024-09-11",
+      "values": {
+        "T2M": 28.4,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 50.0,
+        "ALLSKY_SFC_SW_DWN": 19.6
+      }
+    },
+    {
+      "date": "2024-09-12",
+      "values": {
+        "T2M": 29.3,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 54.0,
+        "ALLSKY_SFC_SW_DWN": 19.7
+      }
+    },
+    {
+      "date": "2024-09-13",
+      "values": {
+        "T2M": 29.1,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 52.0,
+        "ALLSKY_SFC_SW_DWN": 19.5
+      }
+    },
+    {
+      "date": "2024-09-14",
+      "values": {
+        "T2M": 28.0,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 61.0,
+        "ALLSKY_SFC_SW_DWN": 19.2
+      }
+    },
+    {
+      "date": "2024-09-15",
+      "values": {
+        "T2M": 27.7,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 63.0,
+        "ALLSKY_SFC_SW_DWN": 19.7
+      }
+    },
+    {
+      "date": "2024-09-16",
+      "values": {
+        "T2M": 27.5,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 51.0,
+        "ALLSKY_SFC_SW_DWN": 19.1
+      }
+    },
+    {
+      "date": "2024-09-17",
+      "values": {
+        "T2M": 28.2,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 63.0,
+        "ALLSKY_SFC_SW_DWN": 19.4
+      }
+    },
+    {
+      "date": "2024-09-18",
+      "values": {
+        "T2M": 29.3,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 54.0,
+        "ALLSKY_SFC_SW_DWN": 19.7
+      }
+    },
+    {
+      "date": "2024-09-19",
+      "values": {
+        "T2M": 27.4,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 50.0,
+        "ALLSKY_SFC_SW_DWN": 19.0
+      }
+    },
+    {
+      "date": "2024-09-20",
+      "values": {
+        "T2M": 28.4,
+        "PRECTOTCORR": 10.0,
+        "RH2M": 50.0,
+        "ALLSKY_SFC_SW_DWN": 19.6
+      }
+    },
+    {
+      "date": "2024-09-21",
+      "values": {
+        "T2M": 27.5,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 51.0,
+        "ALLSKY_SFC_SW_DWN": 19.1
+      }
+    },
+    {
+      "date": "2024-09-22",
+      "values": {
+        "T2M": 29.1,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 57.0,
+        "ALLSKY_SFC_SW_DWN": 19.1
+      }
+    },
+    {
+      "date": "2024-09-23",
+      "values": {
+        "T2M": 28.0,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 56.0,
+        "ALLSKY_SFC_SW_DWN": 19.6
+      }
+    },
+    {
+      "date": "2024-09-24",
+      "values": {
+        "T2M": 29.2,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 58.0,
+        "ALLSKY_SFC_SW_DWN": 19.2
+      }
+    },
+    {
+      "date": "2024-09-25",
+      "values": {
+        "T2M": 28.8,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 64.0,
+        "ALLSKY_SFC_SW_DWN": 19.2
+      }
+    },
+    {
+      "date": "2024-09-26",
+      "values": {
+        "T2M": 28.0,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 61.0,
+        "ALLSKY_SFC_SW_DWN": 19.2
+      }
+    },
+    {
+      "date": "2024-09-27",
+      "values": {
+        "T2M": 28.5,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 56.0,
+        "ALLSKY_SFC_SW_DWN": 19.3
+      }
+    },
+    {
+      "date": "2024-09-28",
+      "values": {
+        "T2M": 29.0,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 56.0,
+        "ALLSKY_SFC_SW_DWN": 19.0
+      }
+    },
+    {
+      "date": "2024-09-29",
+      "values": {
+        "T2M": 28.3,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 64.0,
+        "ALLSKY_SFC_SW_DWN": 19.5
+      }
+    },
+    {
+      "date": "2024-09-30",
+      "values": {
+        "T2M": 28.4,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 50.0,
+        "ALLSKY_SFC_SW_DWN": 19.6
+      }
+    },
+    {
+      "date": "2024-10-01",
+      "values": {
+        "T2M": 23.6,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 51.0,
+        "ALLSKY_SFC_SW_DWN": 16.8
+      }
+    },
+    {
+      "date": "2024-10-02",
+      "values": {
+        "T2M": 22.7,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 53.0,
+        "ALLSKY_SFC_SW_DWN": 16.6
+      }
+    },
+    {
+      "date": "2024-10-03",
+      "values": {
+        "T2M": 22.1,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 51.0,
+        "ALLSKY_SFC_SW_DWN": 16.6
+      }
+    },
+    {
+      "date": "2024-10-04",
+      "values": {
+        "T2M": 23.2,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 49.0,
+        "ALLSKY_SFC_SW_DWN": 17.4
+      }
+    },
+    {
+      "date": "2024-10-05",
+      "values": {
+        "T2M": 23.0,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 46.0,
+        "ALLSKY_SFC_SW_DWN": 16.9
+      }
+    },
+    {
+      "date": "2024-10-06",
+      "values": {
+        "T2M": 22.8,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 46.0,
+        "ALLSKY_SFC_SW_DWN": 16.9
+      }
+    },
+    {
+      "date": "2024-10-07",
+      "values": {
+        "T2M": 21.7,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 54.0,
+        "ALLSKY_SFC_SW_DWN": 16.9
+      }
+    },
+    {
+      "date": "2024-10-08",
+      "values": {
+        "T2M": 21.6,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 49.0,
+        "ALLSKY_SFC_SW_DWN": 17.0
+      }
+    },
+    {
+      "date": "2024-10-09",
+      "values": {
+        "T2M": 21.1,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 49.0,
+        "ALLSKY_SFC_SW_DWN": 17.2
+      }
+    },
+    {
+      "date": "2024-10-10",
+      "values": {
+        "T2M": 21.2,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 55.0,
+        "ALLSKY_SFC_SW_DWN": 17.0
+      }
+    },
+    {
+      "date": "2024-10-11",
+      "values": {
+        "T2M": 21.4,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 44.0,
+        "ALLSKY_SFC_SW_DWN": 16.9
+      }
+    },
+    {
+      "date": "2024-10-12",
+      "values": {
+        "T2M": 20.5,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 54.0,
+        "ALLSKY_SFC_SW_DWN": 17.1
+      }
+    },
+    {
+      "date": "2024-10-13",
+      "values": {
+        "T2M": 20.4,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 49.0,
+        "ALLSKY_SFC_SW_DWN": 17.2
+      }
+    },
+    {
+      "date": "2024-10-14",
+      "values": {
+        "T2M": 20.0,
+        "PRECTOTCORR": 6.0,
+        "RH2M": 50.0,
+        "ALLSKY_SFC_SW_DWN": 16.5
+      }
+    },
+    {
+      "date": "2024-10-15",
+      "values": {
+        "T2M": 20.0,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 49.0,
+        "ALLSKY_SFC_SW_DWN": 17.2
+      }
+    },
+    {
+      "date": "2024-10-16",
+      "values": {
+        "T2M": 20.4,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 45.0,
+        "ALLSKY_SFC_SW_DWN": 17.2
+      }
+    },
+    {
+      "date": "2024-10-17",
+      "values": {
+        "T2M": 19.8,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 47.0,
+        "ALLSKY_SFC_SW_DWN": 16.8
+      }
+    },
+    {
+      "date": "2024-10-18",
+      "values": {
+        "T2M": 19.5,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 49.0,
+        "ALLSKY_SFC_SW_DWN": 17.2
+      }
+    },
+    {
+      "date": "2024-10-19",
+      "values": {
+        "T2M": 20.2,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 46.0,
+        "ALLSKY_SFC_SW_DWN": 17.1
+      }
+    },
+    {
+      "date": "2024-10-20",
+      "values": {
+        "T2M": 19.9,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 53.0,
+        "ALLSKY_SFC_SW_DWN": 17.4
+      }
+    },
+    {
+      "date": "2024-10-21",
+      "values": {
+        "T2M": 18.9,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 45.0,
+        "ALLSKY_SFC_SW_DWN": 16.6
+      }
+    },
+    {
+      "date": "2024-10-22",
+      "values": {
+        "T2M": 18.9,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 44.0,
+        "ALLSKY_SFC_SW_DWN": 17.3
+      }
+    },
+    {
+      "date": "2024-10-23",
+      "values": {
+        "T2M": 18.5,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 48.0,
+        "ALLSKY_SFC_SW_DWN": 17.1
+      }
+    },
+    {
+      "date": "2024-10-24",
+      "values": {
+        "T2M": 19.2,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 45.0,
+        "ALLSKY_SFC_SW_DWN": 17.0
+      }
+    },
+    {
+      "date": "2024-10-25",
+      "values": {
+        "T2M": 19.5,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 52.0,
+        "ALLSKY_SFC_SW_DWN": 16.9
+      }
+    },
+    {
+      "date": "2024-10-26",
+      "values": {
+        "T2M": 18.3,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 54.0,
+        "ALLSKY_SFC_SW_DWN": 16.9
+      }
+    },
+    {
+      "date": "2024-10-27",
+      "values": {
+        "T2M": 17.9,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 49.0,
+        "ALLSKY_SFC_SW_DWN": 17.2
+      }
+    },
+    {
+      "date": "2024-10-28",
+      "values": {
+        "T2M": 17.6,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 45.0,
+        "ALLSKY_SFC_SW_DWN": 16.6
+      }
+    },
+    {
+      "date": "2024-10-29",
+      "values": {
+        "T2M": 17.6,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 52.0,
+        "ALLSKY_SFC_SW_DWN": 16.7
+      }
+    },
+    {
+      "date": "2024-10-30",
+      "values": {
+        "T2M": 17.6,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 51.0,
+        "ALLSKY_SFC_SW_DWN": 17.4
+      }
+    },
+    {
+      "date": "2024-10-31",
+      "values": {
+        "T2M": 17.2,
+        "PRECTOTCORR": 0.0,
+        "RH2M": 49.0,
+        "ALLSKY_SFC_SW_DWN": 17.2
+      }
+    }
+  ],
+  "aggregates": {
+    "monthly": [
+      {
+        "period": "2024-05",
+        "aggregation_method": "mean for temperature/humidity/radiation, cumulative sum for precipitation",
+        "total_days": 31,
+        "valid_days": 31,
+        "coverage_ratio": 1.0,
+        "values": {
+          "T2M": {
+            "mean": 31.3,
+            "min": 28.4,
+            "max": 34.1,
+            "unit": "°C"
+          },
+          "PRECTOTCORR": {
+            "sum": 7.0,
+            "min": 0.0,
+            "max": 3.5,
+            "unit": "mm/month"
+          },
+          "RH2M": {
+            "mean": 44.0,
+            "min": 38.0,
+            "max": 49.0,
+            "unit": "%"
+          },
+          "ALLSKY_SFC_SW_DWN": {
+            "mean": 25.0,
+            "min": 24.5,
+            "max": 25.4,
+            "unit": "MJ/m^2/day"
+          }
+        }
+      },
+      {
+        "period": "2024-06",
+        "aggregation_method": "mean for temperature/humidity/radiation, cumulative sum for precipitation",
+        "total_days": 30,
+        "valid_days": 29,
+        "coverage_ratio": 0.967,
+        "values": {
+          "T2M": {
+            "mean": 35.9,
+            "min": 33.5,
+            "max": 38.3,
+            "unit": "°C"
+          },
+          "PRECTOTCORR": {
+            "sum": 10.0,
+            "min": 0.0,
+            "max": 5.0,
+            "unit": "mm/month"
+          },
+          "RH2M": {
+            "mean": 38.4,
+            "min": 32.0,
+            "max": 46.0,
+            "unit": "%"
+          },
+          "ALLSKY_SFC_SW_DWN": {
+            "mean": 26.5,
+            "min": 26.0,
+            "max": 27.1,
+            "unit": "MJ/m^2/day"
+          }
+        }
+      },
+      {
+        "period": "2024-07",
+        "aggregation_method": "mean for temperature/humidity/radiation, cumulative sum for precipitation",
+        "total_days": 31,
+        "valid_days": 31,
+        "coverage_ratio": 1.0,
+        "values": {
+          "T2M": {
+            "mean": 32.9,
+            "min": 32.0,
+            "max": 33.9,
+            "unit": "°C"
+          },
+          "PRECTOTCORR": {
+            "sum": 70.0,
+            "min": 0.0,
+            "max": 16.5,
+            "unit": "mm/month"
+          },
+          "RH2M": {
+            "mean": 66.8,
+            "min": 58.0,
+            "max": 77.0,
+            "unit": "%"
+          },
+          "ALLSKY_SFC_SW_DWN": {
+            "mean": 22.7,
+            "min": 22.0,
+            "max": 23.4,
+            "unit": "MJ/m^2/day"
+          }
+        }
+      },
+      {
+        "period": "2024-08",
+        "aggregation_method": "mean for temperature/humidity/radiation, cumulative sum for precipitation",
+        "total_days": 31,
+        "valid_days": 31,
+        "coverage_ratio": 1.0,
+        "values": {
+          "T2M": {
+            "mean": 31.0,
+            "min": 30.2,
+            "max": 31.9,
+            "unit": "°C"
+          },
+          "PRECTOTCORR": {
+            "sum": 96.0,
+            "min": 0.0,
+            "max": 22.0,
+            "unit": "mm/month"
+          },
+          "RH2M": {
+            "mean": 72.1,
+            "min": 64.0,
+            "max": 81.0,
+            "unit": "%"
+          },
+          "ALLSKY_SFC_SW_DWN": {
+            "mean": 21.1,
+            "min": 20.5,
+            "max": 21.9,
+            "unit": "MJ/m^2/day"
+          }
+        }
+      },
+      {
+        "period": "2024-09",
+        "aggregation_method": "mean for temperature/humidity/radiation, cumulative sum for precipitation",
+        "total_days": 30,
+        "valid_days": 30,
+        "coverage_ratio": 1.0,
+        "values": {
+          "T2M": {
+            "mean": 28.4,
+            "min": 27.4,
+            "max": 29.3,
+            "unit": "°C"
+          },
+          "PRECTOTCORR": {
+            "sum": 20.0,
+            "min": 0.0,
+            "max": 10.0,
+            "unit": "mm/month"
+          },
+          "RH2M": {
+            "mean": 56.0,
+            "min": 50.0,
+            "max": 64.0,
+            "unit": "%"
+          },
+          "ALLSKY_SFC_SW_DWN": {
+            "mean": 19.4,
+            "min": 19.0,
+            "max": 20.0,
+            "unit": "MJ/m^2/day"
+          }
+        }
+      },
+      {
+        "period": "2024-10",
+        "aggregation_method": "mean for temperature/humidity/radiation, cumulative sum for precipitation",
+        "total_days": 31,
+        "valid_days": 31,
+        "coverage_ratio": 1.0,
+        "values": {
+          "T2M": {
+            "mean": 20.2,
+            "min": 17.2,
+            "max": 23.6,
+            "unit": "°C"
+          },
+          "PRECTOTCORR": {
+            "sum": 6.0,
+            "min": 0.0,
+            "max": 6.0,
+            "unit": "mm/month"
+          },
+          "RH2M": {
+            "mean": 49.1,
+            "min": 44.0,
+            "max": 55.0,
+            "unit": "%"
+          },
+          "ALLSKY_SFC_SW_DWN": {
+            "mean": 17.0,
+            "min": 16.5,
+            "max": 17.4,
+            "unit": "MJ/m^2/day"
+          }
+        }
+      }
+    ],
+    "seasonal": [
+      {
+        "season": "Kharif",
+        "period": "2024-05 to 2024-10",
+        "aggregation_method": "mean for temperature/humidity/radiation, cumulative sum for precipitation",
+        "total_days": 184,
+        "valid_days": 182,
+        "coverage_ratio": 0.989,
+        "values": {
+          "T2M": {
+            "mean": 29.9,
+            "min": 17.2,
+            "max": 38.3,
+            "unit": "°C"
+          },
+          "PRECTOTCORR": {
+            "sum": 209.0,
+            "min": 0.0,
+            "max": 22.0,
+            "unit": "mm/season"
+          },
+          "RH2M": {
+            "mean": 54.5,
+            "min": 32.0,
+            "max": 81.0,
+            "unit": "%"
+          },
+          "ALLSKY_SFC_SW_DWN": {
+            "mean": 22.0,
+            "min": 16.5,
+            "max": 27.1,
+            "unit": "MJ/m^2/day"
+          }
+        }
+      }
+    ]
+  },
+  "missing_data": {
+    "total_days": 184,
+    "missing_days_by_parameter": {
+      "T2M": 0,
+      "PRECTOTCORR": 1,
+      "RH2M": 2,
+      "ALLSKY_SFC_SW_DWN": 0
+    },
+    "has_gaps": true,
+    "notes": "Deliberate test gaps included: 2024-06-15 missing PRECTOTCORR & RH2M; 2024-08-20 missing RH2M. Verified sentinel -999 mapped to null."
+  },
+  "retrieved_at": "2026-11-13T17:30:00Z",
+  "coverage_note": "Gridded NASA satellite and reanalysis data represents regional grid cells (~0.5° × 0.5° / ~50km × 50km resolution), not direct on-farm in-situ sensor measurements. Use for regional decision support and agro-climatic context.",
+  "is_demo_data": true
+}
