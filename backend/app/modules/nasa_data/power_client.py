@@ -12,6 +12,7 @@ from __future__ import annotations
 import asyncio
 from datetime import date, datetime, timezone
 import logging
+import os
 import random
 import time
 from typing import Any, Dict, List, Optional, Tuple
@@ -25,10 +26,12 @@ from backend.app.modules.nasa_data.schemas import (
 
 logger = logging.getLogger(__name__)
 
-NASA_POWER_DAILY_POINT_URL = "https://power.larc.nasa.gov/api/temporal/daily/point"
+NASA_POWER_DAILY_POINT_URL = os.getenv(
+    "NASA_POWER_BASE_URL", "https://power.larc.nasa.gov/api/temporal/daily/point"
+)
 DEFAULT_PARAMETERS = ["T2M", "PRECTOTCORR", "RH2M", "ALLSKY_SFC_SW_DWN"]
-DEFAULT_TIMEOUT_SECONDS = 20.0
-DEFAULT_CACHE_TTL_SECONDS = 3600  # 1 hour
+DEFAULT_TIMEOUT_SECONDS = float(os.getenv("NASA_POWER_TIMEOUT_SECONDS", "20.0"))
+DEFAULT_CACHE_TTL_SECONDS = int(os.getenv("NASA_POWER_CACHE_TTL_SECONDS", "3600"))
 
 
 class NasaPowerClientError(Exception):

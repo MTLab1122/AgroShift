@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import logging
+import os
 import uuid
 from fastapi import FastAPI, Request, status
 from fastapi.exceptions import RequestValidationError
@@ -23,10 +24,13 @@ app = FastAPI(
     description="Backend API and Climate Data Engine for AgroShift (NASA Space Apps Challenge 2026).",
 )
 
-# CORS middleware for local frontend development (Next.js)
+# CORS middleware configurable via environment
+raw_cors = os.getenv("CORS_ORIGINS", "*")
+cors_origins = [o.strip() for o in raw_cors.split(",") if o.strip()] if raw_cors != "*" else ["*"]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=cors_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
