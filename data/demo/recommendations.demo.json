@@ -1,0 +1,108 @@
+{
+  "recommendation_id": "demo-recommendation-peshawar-001",
+  "farm_id": "farm-peshawar-001",
+  "generated_at": "2026-11-13T12:00:00Z",
+  "input_snapshot": {
+    "farm_id": "farm-peshawar-001",
+    "season": "Rabi",
+    "is_demo_data": true
+  },
+  "scenarios": {
+    "baseline": {
+      "scenario_id": "demo-baseline",
+      "title": "Baseline cereal rotation",
+      "crop_sequence": ["wheat", "maize"],
+      "seasonal_calendar": [
+        {
+          "crop": "wheat",
+          "start_month": "October",
+          "harvest_month": "April",
+          "duration_days": 180
+        },
+        {
+          "crop": "maize",
+          "start_month": "June",
+          "harvest_month": "September",
+          "duration_days": 120
+        }
+      ],
+      "score": null,
+      "score_breakdown": {
+        "climate_suitability": 0,
+        "water_efficiency": 0,
+        "soil_health_benefit": 0,
+        "market_resilience": 0
+      },
+      "rationale": ["Example scenario only; no farm-specific score is asserted."],
+      "benefits": ["Provides a baseline for comparing alternative rotations."],
+      "risks": ["Water availability and local conditions require field verification."],
+      "assumptions": ["Calendar dates are illustrative, not a planting prescription."]
+    },
+    "pulse_inclusive": {
+      "scenario_id": "demo-pulse-inclusive",
+      "title": "Pulse-inclusive rotation",
+      "crop_sequence": ["wheat", "mung_bean"],
+      "seasonal_calendar": [
+        {
+          "crop": "wheat",
+          "start_month": "October",
+          "harvest_month": "April",
+          "duration_days": 180
+        },
+        {
+          "crop": "mung_bean",
+          "start_month": "May",
+          "harvest_month": "August",
+          "duration_days": 100
+        }
+      ],
+      "score": null,
+      "score_breakdown": {
+        "climate_suitability": 0,
+        "water_efficiency": 0,
+        "soil_health_benefit": 0,
+        "market_resilience": 0
+      },
+      "rationale": ["Legume inclusion is a scenario for local agronomic review."],
+      "benefits": ["Can diversify the crop sequence."],
+      "risks": ["Seed availability, water, and market conditions may constrain adoption."],
+      "assumptions": ["Suitability has not been validated for an individual field."]
+    },
+    "soil_cover": {
+      "scenario_id": "demo-soil-cover",
+      "title": "Soil-cover rotation",
+      "crop_sequence": ["wheat", "berseem_clover"],
+      "seasonal_calendar": [
+        {
+          "crop": "wheat",
+          "start_month": "October",
+          "harvest_month": "April",
+          "duration_days": 180
+        },
+        {
+          "crop": "berseem_clover",
+          "start_month": "November",
+          "harvest_month": "April",
+          "duration_days": 150
+        }
+      ],
+      "score": null,
+      "score_breakdown": {
+        "climate_suitability": 0,
+        "water_efficiency": 0,
+        "soil_health_benefit": 0,
+        "market_resilience": 0
+      },
+      "rationale": ["This illustrative option requires local agronomist validation."],
+      "benefits": ["Can be assessed as a soil-cover strategy."],
+      "risks": ["Water competition and management timing require assessment."],
+      "assumptions": ["No yield, profit, or suitability outcome is guaranteed."]
+    }
+  },
+  "limitations": [
+    "This synthetic fixture is for software integration only, not agricultural advice.",
+    "AgroShift is a decision-support prototype; no yield or profit outcome is guaranteed.",
+    "Validate crop choices and planting dates with local agronomists and field conditions."
+  ],
+  "is_demo_data": true
+}

@@ -52,3 +52,7 @@ class FarmProfile(BaseModel):
     crop_history: List[CropHistoryEntry] = Field(
         default_factory=list, description="Historical crop sequence"
     )
+    is_demo_data: bool = Field(
+        default=False,
+        description="True when this farm profile is a synthetic integration fixture.",
+    )

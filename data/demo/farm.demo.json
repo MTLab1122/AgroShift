@@ -1,0 +1,34 @@
+{
+  "farm_id": "farm-peshawar-001",
+  "farm_name": "Peshawar Valley Demo Farm",
+  "latitude": 34.0151,
+  "longitude": 71.5249,
+  "area_value": 12.5,
+  "area_unit": "acres",
+  "soil_type": "loamy",
+  "irrigation_type": "tube_well",
+  "water_availability": "medium",
+  "current_crop": "wheat",
+  "season": "Rabi",
+  "crop_history": [
+    {
+      "entry_id": "demo-history-2024-rabi",
+      "crop_name": "wheat",
+      "season": "Rabi",
+      "year": 2024,
+      "yield_value": null,
+      "yield_unit": null,
+      "notes": "Synthetic example record; no measured yield supplied."
+    },
+    {
+      "entry_id": "demo-history-2024-kharif",
+      "crop_name": "maize",
+      "season": "Kharif",
+      "year": 2024,
+      "yield_value": null,
+      "yield_unit": null,
+      "notes": "Synthetic example record; no measured yield supplied."
+    }
+  ],
+  "is_demo_data": true
+}

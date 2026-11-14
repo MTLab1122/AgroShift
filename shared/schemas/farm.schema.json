@@ -71,6 +71,11 @@
       "items": {
         "$ref": "#/$defs/CropHistoryEntry"
       }
+    },
+    "is_demo_data": {
+      "type": "boolean",
+      "description": "True when this profile is a synthetic integration fixture.",
+      "default": false
     }
   },
   "additionalProperties": false,

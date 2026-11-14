@@ -75,3 +75,7 @@ class RecommendationSet(BaseModel):
         default=None,
         description="Structured comparison reconciling user inputs with actual NASA observations.",
     )
+    is_demo_data: bool = Field(
+        default=False,
+        description="True when this recommendation set is a synthetic integration fixture.",
+    )

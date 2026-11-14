@@ -47,6 +47,11 @@
     },
     "farm_vs_nasa_comparison": {
       "$ref": "#/$defs/FarmVsNasaComparison"
+    },
+    "is_demo_data": {
+      "type": "boolean",
+      "description": "True when this recommendation set is a synthetic integration fixture.",
+      "default": false
     }
   },
   "additionalProperties": false,

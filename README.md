@@ -131,7 +131,7 @@ cd frontend
 npm install
 npm run dev
 ```
-Open `http://localhost:3000` to interact with the mission control UI.
+Open the URL printed by Vite (by default, `http://localhost:5173`) to interact with the mission control UI.
 
 ### 7.3 Running Live Terminal Probes
 ```powershell
@@ -144,9 +144,11 @@ python scripts/live_phase3_comparison_demo.py
 
 ### 7.4 Running Automated Test Suite
 ```powershell
+python -m pip install -e ".[test]"
 pytest -v
-# 74 passed in ~20s (100% pass rate)
 ```
+
+The test extra installs the async pytest plugin required by the async API tests.
 
 ---
 
