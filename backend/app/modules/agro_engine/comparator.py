@@ -331,11 +331,18 @@ def compare_farm_to_climate(
         crop_profile=crop_prof,
     )
 
+    # Normalize data_mode
+    raw_mode = data_mode.value if hasattr(data_mode, "value") else str(data_mode)
+    clean_mode: Literal["live", "demo_fallback", "demo_forced"] = "live"
+    norm_str = raw_mode.replace("-", "_").lower()
+    if norm_str in ("live", "demo_fallback", "demo_forced"):
+        clean_mode = norm_str  # type: ignore
+
     return FarmVsNasaComparison(
         observed_rainfall_mm=observed_rain,
         expected_crop_water_need_mm=expected_water_demand,
         water_balance_status=water_status,
         thermal_stress_days=thermal_stress_days,
         irrigation_adequacy_note=adequacy_note,
-        data_mode=data_mode,
+        data_mode=clean_mode,
     )

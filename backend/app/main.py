@@ -12,6 +12,7 @@ from fastapi.responses import JSONResponse
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from backend.app.core.middleware import RequestTracingMiddleware, get_request_id
+from backend.app.modules.agro_engine.router import router as agro_engine_router
 from backend.app.modules.nasa_data.power_client import NasaPowerClientError
 from backend.app.modules.nasa_data.router import router as nasa_data_router
 from backend.app.modules.nasa_data.schemas import ApiError
@@ -42,6 +43,7 @@ app.add_middleware(RequestTracingMiddleware)
 
 # Register Module Routers
 app.include_router(nasa_data_router)
+app.include_router(agro_engine_router)
 
 
 @app.exception_handler(NasaPowerClientError)
