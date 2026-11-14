@@ -144,11 +144,21 @@ python scripts/live_phase3_comparison_demo.py
 
 ### 7.4 Running Automated Test Suite
 ```powershell
-python -m pip install -e ".[test]"
-pytest -v
+python -m pip install -e ".[test,quality]"
+python -m ruff check backend tests scripts
+python -m pytest -q
 ```
 
-The test extra installs the async pytest plugin required by the async API tests.
+The `test` extra installs the async pytest plugin required by the API tests, and
+the `quality` extra installs Ruff for Python linting. In a separate terminal, run
+the frontend checks:
+
+```powershell
+cd frontend
+npm ci
+npm run lint
+npm run build
+```
 
 ---
 
