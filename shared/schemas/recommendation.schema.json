@@ -44,10 +44,53 @@
       "items": { "type": "string" },
       "minItems": 1,
       "description": "Mandatory scientific limitations and decision support disclaimers."
+    },
+    "farm_vs_nasa_comparison": {
+      "$ref": "#/$defs/FarmVsNasaComparison"
     }
   },
   "additionalProperties": false,
   "$defs": {
+    "FarmVsNasaComparison": {
+      "type": "object",
+      "required": [
+        "observed_rainfall_mm",
+        "expected_crop_water_need_mm",
+        "water_balance_status",
+        "thermal_stress_days",
+        "irrigation_adequacy_note",
+        "data_mode"
+      ],
+      "properties": {
+        "observed_rainfall_mm": {
+          "type": "number",
+          "minimum": 0.0,
+          "description": "Total observed precipitation from NASA POWER over the period."
+        },
+        "expected_crop_water_need_mm": {
+          "type": "number",
+          "minimum": 0.0,
+          "description": "Agronomically expected crop water requirement."
+        },
+        "water_balance_status": {
+          "type": "string",
+          "enum": ["severe_deficit", "moderate_deficit", "balanced", "excess_moisture"]
+        },
+        "thermal_stress_days": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Count of days where NASA T2M_MAX exceeded critical heat stress thresholds."
+        },
+        "irrigation_adequacy_note": {
+          "type": "string"
+        },
+        "data_mode": {
+          "type": "string",
+          "enum": ["live", "demo_fallback", "demo_forced"]
+        }
+      },
+      "additionalProperties": false
+    },
     "Scenario": {
       "type": "object",
       "required": [

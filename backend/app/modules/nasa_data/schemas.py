@@ -201,6 +201,42 @@ class MissingDataSummary(BaseModel):
     )
 
 
+class FarmVsNasaComparison(BaseModel):
+    """Diagnostic comparison reconciling user farm inputs against actual NASA observations."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    observed_rainfall_mm: float = Field(
+        ...,
+        ge=0.0,
+        description="Total observed precipitation from NASA POWER (PRECTOTCORR) over the period.",
+    )
+    expected_crop_water_need_mm: float = Field(
+        ...,
+        ge=0.0,
+        description="Agronomically expected crop water requirement based on crop catalog.",
+    )
+    water_balance_status: str = Field(
+        ...,
+        description="Water balance category: severe_deficit, moderate_deficit, balanced, or excess_moisture.",
+        examples=["moderate_deficit", "severe_deficit", "balanced", "excess_moisture"],
+    )
+    thermal_stress_days: int = Field(
+        ...,
+        ge=0,
+        description="Count of days where NASA T2M_MAX exceeded critical heat stress thresholds.",
+    )
+    irrigation_adequacy_note: str = Field(
+        ...,
+        description="Evaluation reconciling reported irrigation type/availability against observed precipitation deficit.",
+    )
+    data_mode: str = Field(
+        default="live",
+        description="Indicates whether comparison was computed against live NASA observations or demo fallback.",
+        examples=["live", "demo_fallback"],
+    )
+
+
 class ClimateSummary(BaseModel):
     """Canonical climate context object produced by Module 02 for downstream modules (03, 04)."""
 
@@ -282,6 +318,10 @@ class ClimateSummary(BaseModel):
     is_demo_data: bool = Field(
         default=False,
         description="Explicit flag: True when synthetic mock fixtures are returned; False for live NASA data.",
+    )
+    farm_vs_nasa_comparison: Optional[FarmVsNasaComparison] = Field(
+        default=None,
+        description="Diagnostic comparison reconciling user farm inputs against live NASA observations.",
     )
 
     @model_validator(mode="after")
