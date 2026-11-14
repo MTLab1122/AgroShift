@@ -11,6 +11,7 @@ from backend.app.modules.nasa_data.schemas import (
     SeasonalAggregate,
 )
 from backend.app.schemas.comparison import FarmVsNasaComparison
+from backend.app.schemas.farm import CropHistoryEntry, FarmProfile
 from backend.app.schemas.recommendation import (
     CalendarEntry,
     RecommendationSet,
@@ -24,7 +25,9 @@ __all__ = [
     "CalendarEntry",
     "ClimateRequest",
     "ClimateSummary",
+    "CropHistoryEntry",
     "DailyRecord",
+    "FarmProfile",
     "FarmVsNasaComparison",
     "MissingDataSummary",
     "MonthlyAggregate",
