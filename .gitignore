@@ -28,3 +28,7 @@ Thumbs.db
 # Environment variables
 .env
 .env.local
+
+/data/agroshift.db
+
+/data/agroshift.db

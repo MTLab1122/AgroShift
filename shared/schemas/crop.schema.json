@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agroshift.incir.internal/schemas/crop.schema.json",
+  "title": "CropHistoryRecord",
+  "description": "Canonical contract for historical and seasonal crop cycles per farm (Module 01 - Farm Management & Location Intelligence).",
+  "type": "object",
+  "required": [
+    "record_id",
+    "farm_id",
+    "crop_name",
+    "season",
+    "year",
+    "status"
+  ],
+  "properties": {
+    "record_id": {
+      "type": "string",
+      "description": "Unique identifier of the crop history record."
+    },
+    "farm_id": {
+      "type": "string",
+      "description": "Foreign key reference to Module 01 FarmProfile farm_id."
+    },
+    "crop_name": {
+      "type": "string",
+      "description": "Name of the crop cultivated (e.g. Wheat, Maize, Sugarcane, Cotton)."
+    },
+    "variety": {
+      "type": "string",
+      "description": "Crop variety, cultivar, or hybrid tag."
+    },
+    "season": {
+      "type": "string",
+      "description": "Agro-climatic season matching Module 02 seasonal terminology.",
+      "enum": ["Kharif", "Rabi", "Zaid", "Spring", "Autumn", "Perennial", "Other"]
+    },
+    "year": {
+      "type": "integer",
+      "description": "Calendar year of planting.",
+      "minimum": 1980,
+      "maximum": 2100
+    },
+    "sowing_date": {
+      "type": ["string", "null"],
+      "format": "date"
+    },
+    "harvest_date": {
+      "type": ["string", "null"],
+      "format": "date"
+    },
+    "area_planted_hectares": {
+      "type": ["number", "null"],
+      "minimum": 0.01
+    },
+    "yield_amount_kg": {
+      "type": ["number", "null"],
+      "description": "Harvested yield quantity in kilograms."
+    },
+    "status": {
+      "type": "string",
+      "description": "Lifecycle status of the crop cycle.",
+      "enum": ["planned", "sown", "growing", "harvested", "failed"]
+    },
+    "notes": {
+      "type": "string",
+      "description": "Agronomic notes, fertilizer usage, or disease events."
+    }
+  },
+  "additionalProperties": false
+}

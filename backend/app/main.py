@@ -13,6 +13,7 @@ from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from backend.app.modules.nasa_data.power_client import NasaPowerClientError
 from backend.app.modules.nasa_data.router import router as nasa_data_router
+from backend.app.modules.farm_management.router import router as farm_management_router
 from backend.app.modules.nasa_data.schemas import ApiError
 
 logging.basicConfig(level=logging.INFO)
@@ -21,7 +22,7 @@ logger = logging.getLogger(__name__)
 app = FastAPI(
     title="AgroShift Backend API",
     version="0.1.0",
-    description="Backend API and Climate Data Engine for AgroShift (NASA Space Apps Challenge 2026).",
+    description="Backend API, Farm Management & Location Intelligence, and Climate Data Engine for AgroShift (NASA Space Apps Challenge 2026).",
 )
 
 # CORS middleware configurable via environment
@@ -36,8 +37,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Register Module 02 Router
+# Register Modules
 app.include_router(nasa_data_router)
+app.include_router(farm_management_router)
 
 
 @app.exception_handler(NasaPowerClientError)
