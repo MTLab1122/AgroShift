@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agroshift.incir.internal/schemas/error.schema.json",
+  "title": "ApiError",
+  "description": "Canonical error response envelope used across all AgroShift API endpoints.",
+  "type": "object",
+  "required": ["error_code", "message"],
+  "properties": {
+    "error_code": {
+      "type": "string",
+      "description": "Standardized uppercase error code (e.g. INVALID_COORDINATES, UPSTREAM_TIMEOUT, NOT_FOUND)."
+    },
+    "message": {
+      "type": "string",
+      "description": "Human-readable explanation of failure with remediation guidance."
+    },
+    "details": {
+      "description": "Optional contextual dictionary or list with field validation hints or stack traces."
+    },
+    "request_id": {
+      "type": "string",
+      "description": "Unique correlation identifier for distributed tracing and error auditing."
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agroshift.incir.internal/schemas/farm.schema.json",
+  "title": "FarmProfile",
+  "description": "Canonical contract for Module 01 Farm Management & Location Intelligence profile in AgroShift.",
+  "type": "object",
+  "required": [
+    "farm_id",
+    "farm_name",
+    "latitude",
+    "longitude",
+    "area_value",
+    "area_unit",
+    "soil_type",
+    "irrigation_type",
+    "water_availability",
+    "current_crop",
+    "season",
+    "crop_history"
+  ],
+  "properties": {
+    "farm_id": {
+      "type": "string",
+      "description": "Unique farm identifier (e.g. farm-peshawar-001).",
+      "minLength": 1
+    },
+    "farm_name": {
+      "type": "string",
+      "description": "Descriptive farmer or village name.",
+      "minLength": 1
+    },
+    "latitude": {
+      "type": "number",
+      "minimum": -90.0,
+      "maximum": 90.0
+    },
+    "longitude": {
+      "type": "number",
+      "minimum": -180.0,
+      "maximum": 180.0
+    },
+    "area_value": {
+      "type": "number",
+      "exclusiveMinimum": 0.0
+    },
+    "area_unit": {
+      "type": "string",
+      "enum": ["acres", "hectares", "kanals", "jeribs"]
+    },
+    "soil_type": {
+      "type": "string",
+      "enum": ["clay", "sandy", "loamy", "silty", "clay_loam", "other", "unknown"]
+    },
+    "irrigation_type": {
+      "type": "string",
+      "enum": ["canal", "tube_well", "rain_fed", "drip", "sprinkler", "other", "unknown"]
+    },
+    "water_availability": {
+      "type": "string",
+      "enum": ["low", "medium", "high", "unknown"]
+    },
+    "current_crop": {
+      "type": "string"
+    },
+    "season": {
+      "type": "string",
+      "enum": ["Kharif", "Rabi", "Zaid", "Spring", "Summer", "Winter", "Annual", "other", "unknown"]
+    },
+    "crop_history": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/CropHistoryEntry"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "CropHistoryEntry": {
+      "type": "object",
+      "required": ["entry_id", "crop_name", "season", "year"],
+      "properties": {
+        "entry_id": { "type": "string" },
+        "crop_name": { "type": "string" },
+        "season": { "type": "string" },
+        "year": { "type": "integer", "minimum": 1900 },
+        "yield_value": { "type": ["number", "null"] },
+        "yield_unit": { "type": ["string", "null"] },
+        "notes": { "type": ["string", "null"] }
+      },
+      "additionalProperties": false
+    }
+  }
+}
