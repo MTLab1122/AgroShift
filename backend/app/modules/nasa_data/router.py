@@ -1,30 +1,26 @@
-"""FastAPI Router for Module 02: NASA Earth Observation & Climate Data Engine.
+"""FastAPI Router for Module 02 & Module 05: Climate Data Engine & Integration Gateway.
 
 Exposes:
-- GET /api/v1/climate/summary: Canonical ClimateSummary object with aggregates and provenance.
+- GET /health & GET /api/v1/health: Deep readiness and module health inspector.
+- GET /api/v1/climate/summary: Canonical ClimateSummary with resilient gateway fallback.
 - GET /api/v1/climate/history: Detailed daily and monthly environmental time-series records.
 - GET /api/v1/nasa/power: Diagnostic endpoint for cache inspection and raw upstream verification.
-- GET /health: Health check endpoint compatible with Module 05.
 """
 
 from __future__ import annotations
 
+from datetime import datetime, timezone
 import json
+import os
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 import uuid
 
-from fastapi import APIRouter, Depends, Query, Request, Response
+from fastapi import APIRouter, Query, Request, Response
 from fastapi.responses import JSONResponse
 
-from backend.app.modules.nasa_data.aggregations import (
-    compute_all_aggregates,
-    compute_monthly_aggregates,
-)
-from backend.app.modules.nasa_data.normalizer import (
-    VERIFIED_PARAMETERS,
-    normalize_power_response,
-)
+from backend.app.core.gateway import gateway
+from backend.app.core.middleware import get_request_id
 from backend.app.modules.nasa_data.power_client import (
     NasaPowerClient,
     NasaPowerClientError,
@@ -38,25 +34,10 @@ from backend.app.modules.nasa_data.schemas import (
     ParameterMetadata,
 )
 
-router = APIRouter(tags=["NASA Climate Data"])
+router = APIRouter(tags=["NASA Climate Data & Integration"])
 
 # Global client singleton
 power_client = NasaPowerClient()
-
-FIXTURE_PATH = (
-    Path(__file__).resolve().parent / "fixtures" / "climate.mock.json"
-)
-
-
-def get_demo_summary() -> ClimateSummary:
-    """Load local Peshawar Valley demo fixture."""
-    if not FIXTURE_PATH.is_file():
-        # Fallback to data/demo/climate.mock.json
-        alt_path = Path(__file__).resolve().parents[4] / "data" / "demo" / "climate.mock.json"
-        with open(alt_path, "r", encoding="utf-8") as f:
-            return ClimateSummary.model_validate_json(f.read())
-    with open(FIXTURE_PATH, "r", encoding="utf-8") as f:
-        return ClimateSummary.model_validate_json(f.read())
 
 
 def parse_parameter_list(raw_params: Optional[str]) -> Optional[List[str]]:
@@ -67,15 +48,83 @@ def parse_parameter_list(raw_params: Optional[str]) -> Optional[List[str]]:
     return codes if codes else None
 
 
-@router.get("/health", summary="Service Health Check")
-async def health_check() -> Dict[str, Any]:
-    """Basic service health check compatible with Module 05."""
+async def get_system_health_report() -> Dict[str, Any]:
+    """Compile deep diagnostics and module readiness report."""
     cache_size = await power_client.cache.size()
+    demo_ready = gateway.is_demo_fixture_available()
+
     return {
         "status": "healthy",
-        "module": "Module 02 - NASA Earth Observation & Climate Data Engine",
+        "version": "1.0.0",
+        "schema_version": "2026.1",
         "cache_entries": cache_size,
+        "environment": os.getenv("ENVIRONMENT", "development"),
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "modules": {
+            "module_01_farm": {
+                "name": "Farm Management & Location Intelligence",
+                "owner": "Sana Jalal",
+                "status": "ready",
+                "contract": "FarmProfile",
+                "branch": "feature/farm-module",
+            },
+            "module_02_nasa": {
+                "name": "NASA Earth Observation & Climate Engine",
+                "owner": "Muhammad Talha",
+                "status": "ready",
+                "contract": "ClimateSummary",
+                "branch": "feature/nasa-data",
+                "upstream_source": "NASA POWER Daily API (AG community)",
+                "cache_entries": cache_size,
+                "cache_ttl_seconds": power_client.cache.default_ttl,
+            },
+            "module_03_agro": {
+                "name": "Agro Intelligence & Crop Rotation Engine",
+                "owner": "Hira Dawood",
+                "status": "ready",
+                "contract": "RecommendationSet",
+                "branch": "feature/agro-engine",
+            },
+            "module_04_analytics": {
+                "name": "Analytics, Visualization & Reporting",
+                "owner": "Aqsa Faisal",
+                "status": "ready",
+                "contract": "ScenarioComparison",
+                "branch": "feature/analytics",
+            },
+            "module_05_integration": {
+                "name": "Integration, Security, QA & Deployment",
+                "owner": "Sudais Ahmad",
+                "status": "ready",
+                "branch": "feature/integration",
+                "gateway_mode": "active",
+                "demo_fallback_available": demo_ready,
+            },
+        },
+        "diagnostics": {
+            "nasa_power_url": power_client.base_url,
+            "cache_entries": cache_size,
+            "demo_fixture_available": demo_ready,
+            "canonical_schemas": [
+                "farm.schema.json",
+                "climate.schema.json",
+                "recommendation.schema.json",
+                "error.schema.json",
+            ],
+        },
     }
+
+
+@router.get("/health", summary="Basic Service Health Check")
+async def health_check() -> Dict[str, Any]:
+    """Compatibility health check endpoint."""
+    return await get_system_health_report()
+
+
+@router.get("/api/v1/health", summary="Deep Readiness & Module Diagnostics")
+async def deep_health_check() -> Dict[str, Any]:
+    """Deep readiness and per-module diagnostic inspector."""
+    return await get_system_health_report()
 
 
 @router.get(
@@ -89,6 +138,8 @@ async def health_check() -> Dict[str, Any]:
     },
 )
 async def get_climate_summary(
+    request: Request,
+    response: Response,
     farm_id: str = Query(..., description="Unique identifier of the farm from Module 01"),
     latitude: float = Query(..., description="Latitude in decimal degrees (-90.0 to 90.0)"),
     longitude: float = Query(..., description="Longitude in decimal degrees (-180.0 to 180.0)"),
@@ -103,59 +154,25 @@ async def get_climate_summary(
     ),
     demo: bool = Query(False, description="Force mock Peshawar Valley demo data"),
 ) -> ClimateSummary:
-    """Retrieve normalized NASA environmental data and climate aggregations."""
-    request_id = f"req-{uuid.uuid4().hex[:8]}"
-
-    # Fast path: demo mode
-    if demo:
-        demo_summary = get_demo_summary()
-        if not include_daily:
-            return demo_summary.model_copy(update={"daily_series": None})
-        return demo_summary
-
+    """Retrieve normalized NASA environmental data and climate aggregations with resilient gateway fallback."""
+    req_id = get_request_id(request)
     param_list = parse_parameter_list(parameters)
 
-    # Pre-flight validation occurs inside fetch_daily_point
-    power_res = await power_client.fetch_daily_point(
+    summary, mode = await gateway.get_climate_summary(
+        power_client=power_client,
         farm_id=farm_id,
         latitude=latitude,
         longitude=longitude,
         start_date=start_date,
         end_date=end_date,
         parameters=param_list,
-        request_id=request_id,
+        include_daily=include_daily,
+        force_demo=demo,
+        request_id=req_id,
+        response=response,
     )
 
-    meta_params, daily_records, missing_data = normalize_power_response(
-        raw_payload=power_res["raw_data"],
-        start_date=start_date,
-        end_date=end_date,
-        requested_parameters=power_res["request_meta"]["parameters"],
-    )
-
-    aggregates = compute_all_aggregates(daily_records)
-
-    coverage_note = (
-        "Gridded NASA satellite and reanalysis data represents regional grid cells (~0.5° × 0.5° / ~50km × 50km resolution), "
-        "not direct on-farm in-situ sensor measurements. Use for regional decision support and agro-climatic context."
-    )
-
-    return ClimateSummary(
-        farm_id=farm_id,
-        source="NASA POWER Daily API",
-        product_or_dataset="MERRA-2 / GEOS-5 FP-IT / CERES SYN1deg via POWER AG community",
-        latitude=round(latitude, 4),
-        longitude=round(longitude, 4),
-        start_date=start_date,
-        end_date=end_date,
-        parameters=meta_params,
-        daily_series=daily_records if include_daily else None,
-        aggregates=aggregates,
-        missing_data=missing_data,
-        retrieved_at=power_res["retrieved_at"],
-        coverage_note=coverage_note,
-        is_demo_data=False,
-    )
+    return summary
 
 
 @router.get(
@@ -167,6 +184,8 @@ async def get_climate_summary(
     },
 )
 async def get_climate_history(
+    request: Request,
+    response: Response,
     farm_id: str = Query(..., description="Unique identifier of the farm"),
     latitude: float = Query(...),
     longitude: float = Query(...),
@@ -177,6 +196,8 @@ async def get_climate_history(
 ) -> Dict[str, Any]:
     """Retrieve daily time-series records and monthly aggregates for history table/charting."""
     summary = await get_climate_summary(
+        request=request,
+        response=response,
         farm_id=farm_id,
         latitude=latitude,
         longitude=longitude,
@@ -207,6 +228,7 @@ async def get_climate_history(
     summary="Diagnostic NASA POWER Cache & Raw Inspector",
 )
 async def inspect_nasa_power(
+    request: Request,
     latitude: float = Query(...),
     longitude: float = Query(...),
     start_date: str = Query(...),
@@ -215,7 +237,7 @@ async def inspect_nasa_power(
     bypass_cache: bool = Query(False),
 ) -> Dict[str, Any]:
     """Diagnostic route exposing cache status, upstream query metadata, and raw inspection."""
-    request_id = f"diag-{uuid.uuid4().hex[:8]}"
+    req_id = get_request_id(request)
     param_list = parse_parameter_list(parameters)
 
     power_res = await power_client.fetch_daily_point(
@@ -225,7 +247,7 @@ async def inspect_nasa_power(
         start_date=start_date,
         end_date=end_date,
         parameters=param_list,
-        request_id=request_id,
+        request_id=req_id,
         bypass_cache=bypass_cache,
     )
 

@@ -61,8 +61,8 @@ All backend routes are prefixed with `/api/v1` (with root `/health` available fo
 ### 4.2 Installation
 ```bash
 # Clone and enter repo
-git clone https://github.com/MTLab1122/AgroShift_Dummy.git
-cd AgroShift_Dummy
+git clone https://github.com/MTLab1122/AgroShift.git
+cd AgroShift
 git checkout feature/nasa-data
 
 # Initialize virtual environment

@@ -1,119 +1,88 @@
 # Data Sources, Parameter Catalog & Scientific Provenance
 
-**AgroShift — Module 02: NASA Earth Observation & Climate Data Engine**  
-**Team InCir (Innovation Circle), Abasyn University Peshawar**  
-**NASA Space Apps Challenge 2026**
+**AgroShift — Module 02 & Module 03: NASA Earth Observation & Comparison Engine**  
+**NASA Space Apps Challenge 2026: Adapting Farms with NASA Data**  
+**Challenge Resources Reference:** [https://www.spaceappschallenge.org/2026/challenges/adapting-farms-with-nasa-data/?tab=resources](https://www.spaceappschallenge.org/2026/challenges/adapting-farms-with-nasa-data/?tab=resources)  
+**Team InCir (Innovation Circle), Abasyn University Peshawar**
 
 ---
 
-## 1. Executive Summary & Module Mission
+## 1. Challenge Alignment & Mission
 
-The mission of Module 02 is to retrieve, validate, normalize, and aggregate NASA Earth Observation and climate data for any registered farm location (`latitude`, `longitude`) over an arbitrary ISO date interval (`start_date`, `end_date` in `YYYY-MM-DD`). 
+AgroShift directly addresses the **NASA Space Apps Challenge 2026: Adapting Farms with NASA Data** by leveraging NASA Earth observation assets to help farmers transition toward climate-resilient practices.
 
-This document defines the primary live data source, exact parameter identifiers, physical units, assimilation models, temporal coverage, spatial resolution caveats, missing-data sentinel protocols, and the integration evaluation of stretch data sources (SMAP, GPM).
+The system connects user-submitted farm details (`latitude`, `longitude`, `start_date`, `end_date`, `soil_type`, `irrigation_type`, `water_availability`, `current_crop`, `crop_history`) to live NASA data. It then conducts an objective **Farm-Input vs. Live NASA Observation Comparison** to generate transparent, explainable crop-rotation recommendations.
 
 ---
 
-## 2. Primary Live Data Source: NASA POWER Daily API
+## 2. Authorized NASA Challenge Datasets
 
-### 2.1 Service Overview
-- **Service Name:** NASA Prediction of Worldwide Energy Resources (POWER)
+### 2.1 Primary Live Source: NASA POWER Daily Agroclimatology API
+- **Agency / Facility:** NASA Langley Research Center (LaRC)
 - **API Endpoint:** `https://power.larc.nasa.gov/api/temporal/daily/point`
-- **Documentation:** [https://power.larc.nasa.gov/docs/services/api/temporal/daily/](https://power.larc.nasa.gov/docs/services/api/temporal/daily/)
-- **Target Community:** Agroclimatology (`AG`)
-- **Output Format:** JSON (`format=JSON`)
-- **Temporal Resolution:** Daily (`temporal/daily`)
-- **Spatial Subsetting:** Single Point (`point`) via Decimal Degree Coordinates
+- **Agroclimatology Community:** `AG` (agricultural units)
+- **Authentication:** Public open-access (NO API key required)
+- **Underlying Assimilation Models:**
+  - Modern-Era Retrospective analysis for Research and Applications, Version 2 (**MERRA-2**)
+  - Goddard Earth Observing System Forward Processing for Instrument Teams (**GEOS-5 FP-IT**)
+  - Clouds and the Earth's Radiant Energy System (**CERES SYN1deg**)
+- **Spatial Resolution:** ~0.5° × 0.5° latitude/longitude grid cells (~50 km × 50 km).
+- **Temporal Resolution:** Continuous daily records from January 1, 1981 to near-present (2–5 day processing latency).
 
-### 2.2 Standard Request Template
-```http
-GET https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M,PRECTOTCORR,RH2M,ALLSKY_SFC_SW_DWN&community=AG&longitude=71.5249&latitude=34.0151&start=20240501&end=20241031&format=JSON HTTP/1.1
-Host: power.larc.nasa.gov
-Accept: application/json
-```
-
-### 2.3 Query Parameter Specifications
-| Parameter | Type | Required | Description & Constraints |
+#### Parameter Catalog
+| Code | Parameter Label | Official Unit | Scientific Role |
 |:---|:---|:---|:---|
-| `community` | string | Yes | Must be `AG` (Agroclimatology community, providing agricultural units). |
-| `parameters` | string | Yes | Comma-delimited list of verified parameter codes (e.g., `T2M,PRECTOTCORR,RH2M,ALLSKY_SFC_SW_DWN`). |
-| `latitude` | float | Yes | Decimal degrees north/south: `[-90.0, 90.0]`. **Never swap with longitude.** |
-| `longitude` | float | Yes | Decimal degrees east/west: `[-180.0, 180.0]`. |
-| `start` | string | Yes | Start date in `YYYYMMDD` format (minimum: `19810101`). |
-| `end` | string | Yes | End date in `YYYYMMDD` format (must be `>= start` and within archive coverage). |
-| `format` | string | Yes | Must be `JSON`. |
+| `T2M` | Temperature at 2 Meters | `°C` | Daily mean thermal tracking, crop development baseline. |
+| `T2M_MAX` | Maximum Temperature at 2 Meters | `°C` | Pollination heat stress, canopy scorch threshold audit. |
+| `T2M_MIN` | Minimum Temperature at 2 Meters | `°C` | Frost hazard identification during Rabi transition. |
+| `PRECTOTCORR` | Precipitation Corrected | `mm/day` | Actual observed moisture input vs. crop water need. |
+| `RH2M` | Relative Humidity at 2 Meters | `%` | Atmospheric moisture demand, fungal disease risk screening. |
+| `ALLSKY_SFC_SW_DWN` | Solar Irradiance | `MJ/m²/day` | Canopy radiation absorption, photosynthetic potential. |
+
+### 2.2 Secondary Earth Observation Hooks
+
+#### NASA SMAP (Soil Moisture Active Passive) L4
+- **Product:** SPL4SMGP (Global 9 km Surface & Root-Zone Soil Moisture)
+- **Spatial Resolution:** 9 km EASE-Grid 2.0
+- **Access Protocol:** NASA Earthdata Login (CMR Granule API with Bearer token)
+- **Role in AgroShift:** Secondary ground-truth layer for root-zone moisture availability to validate farmer-reported irrigation adequacy.
+- **Status:** Integrated via adapter hook (`earthdata_adapters.py`). When `NASA_EARTHDATA_TOKEN` is unset, the system explicitly reports `"unavailable - token not configured"` without inventing synthetic measurements.
+
+#### NASA GPM IMERG (Global Precipitation Measurement)
+- **Product:** GPM_3IMERGDF (Daily Calibrated Precipitation at 0.1° × 0.1°)
+- **Spatial Resolution:** 0.1° × 0.1° (~10 km × 10 km)
+- **Access Protocol:** NASA GES DISC with Earthdata credentials
+- **Role in AgroShift:** Finer-scale precipitation benchmarking for localized heavy rainfall/monsoon events.
+- **Status:** Integrated via modular adapter hook.
 
 ---
 
-## 3. Verified Parameter Catalog
+## 3. Farm-Input vs. NASA Comparison Methodology
 
-| Parameter Code | Full Description | Official Unit | Primary Underlying Dataset / Sensor | Downstream Agronomic Role |
-|:---|:---|:---|:---|:---|
-| `T2M` | Temperature at 2 Meters | `°C` | MERRA-2 (Global Modeling and Assimilation Office - GMAO) / GEOS-5 FP-IT | Thermal stress, Growing Degree Days (GDD), crop suitability windows. |
-| `PRECTOTCORR` | Precipitation Corrected | `mm/day` | MERRA-2 bias-corrected reanalysis precipitation | Crop water balance, soil moisture recharge, drought risk indexing. |
-| `RH2M` | Relative Humidity at 2 Meters | `%` | MERRA-2 / GEOS-5 (derived from 2m specific humidity & temperature) | Evaporative demand, pest & fungal pathogen incubation pressure. |
-| `ALLSKY_SFC_SW_DWN` | All Sky Surface Shortwave Downward Irradiance | `MJ/m²/day` | CERES SYN1deg / FlashFlux / MERRA-2 solar assimilation | Photosynthetic active radiation (PAR), canopy energy balance, solar drying. |
-| `T2M_MIN` *(Aux)* | Minimum Temperature at 2 Meters | `°C` | MERRA-2 / GEOS-5 FP-IT daily minimum | Frost risk assessment for winter/Rabi transition crops. |
-| `T2M_MAX` *(Aux)* | Maximum Temperature at 2 Meters | `°C` | MERRA-2 / GEOS-5 FP-IT daily maximum | Heat stress thresholds during pollination/flowering. |
+When a farm profile is analyzed against NASA observations, the backend computes a structured `FarmVsNasaComparison`:
 
----
+1. **Observed Rainfall vs. Crop Water Need:**
+   - Aggregates live NASA `PRECTOTCORR` over the analysis window ($R_{\text{obs}}$ in mm).
+   - Looks up the crop's physiological seasonal water requirement ($W_{\text{need}}$ in mm) from the agronomic catalog.
+   - Categorizes **Water Balance Status**:
+     - `severe_deficit`: $R_{\text{obs}} < 0.4 \times W_{\text{need}}$ (rainfed farms face severe drought stress).
+     - `moderate_deficit`: $0.4 \times W_{\text{need}} \le R_{\text{obs}} < 0.8 \times W_{\text{need}}$.
+     - `balanced`: $0.8 \times W_{\text{need}} \le R_{\text{obs}} \le 1.3 \times W_{\text{need}}$.
+     - `excess_moisture`: $R_{\text{obs}} > 1.3 \times W_{\text{need}}$ (waterlogging / flood risk).
 
-## 4. Scientific Integrity, Missing Data & Sentinel Values
+2. **Irrigation Adequacy Audit:**
+   - Reconciles farmer's declared `irrigation_type` (e.g. `canal`, `tube_well`, `rain_fed`) and `water_availability` (`low`, `medium`, `high`) with observed NASA rainfall deficit.
+   - For example, if rainfall is severely deficient but farmer has `canal` with `high` availability, irrigation buffer is confirmed. If `rain_fed`, high drought vulnerability is flagged.
 
-### 4.1 Missing-Data Sentinel Protocol
-- **NASA POWER Convention:** The NASA POWER API returns `-999.0` (or `-999`) for dates, hours, or locations where observational or assimilation data is missing, corrupted, or unavailable.
-- **Strict Transformation Rule:** Every occurrence of `-999.0` MUST be converted strictly to `null` (`None` in Python).
-- **Zero Fabrication Principle:**
-  - **Never replace missing precipitation with `0.0 mm`** (which falsely implies dry weather).
-  - **Never replace missing temperature with `0.0 °C`** (which falsely implies freezing conditions).
-  - **Never interpolate synthetic numbers without explicit caller opt-in and audit logging.**
-- **Missing Data Bookkeeping:**
-  All normalized responses produce a `MissingDataSummary` reporting:
-  - Total elapsed calendar days.
-  - Count of missing days per parameter.
-  - Boolean `has_gaps`.
-  - Explanatory audit notes.
+3. **Thermal Stress Days:**
+   - Tallies days where live NASA `T2M_MAX` exceeds crop heat threshold (e.g., $>35^\circ\text{C}$ for wheat anthesis, $>42^\circ\text{C}$ for maize), or `T2M_MIN` falls below frost threshold ($<2^\circ\text{C}$).
 
 ---
 
-## 5. Spatial Resolution & Provenance Disclosure
+## 4. Scientific Honesty & Missing Data Rules
 
-### 5.1 Grid Cell Resolution Caveats
-NASA POWER provides meteorological variables derived from NASA's Modern-Era Retrospective analysis for Research and Applications, Version 2 (**MERRA-2**) and the GEOS atmospheric assimilation system, combined with **CERES** satellite solar data:
-- **Spatial Resolution:** Approximately **0.5° latitude × 0.5° longitude** (~50 km × 50 km at mid-latitudes). Solar radiation is provided on a **1.0° × 1.0°** CERES grid.
-- **Gridded vs. In-Situ Measurement:** The data represents spatial averages over large grid cells. It does NOT capture microclimates created by local tree canopy cover, localized valley drainage, or specific farm soil beds.
-- **Mandatory Coverage Note:**
-  Every response emitted by Module 02 carries the following explicit statement:
+- **Strict Sentinel Conversion:** NASA POWER uses `-999.0` for missing or corrupted observations. All `-999.0` values are mapped strictly to `null` (`None`).
+- **Zero Fabrication:** Unobserved days remain `null`. The system **never** replaces missing precipitation with `0.0 mm` or missing temperature with `0.0 °C`.
+- **Spatial Caveats:** All responses and exports explicitly carry the regional resolution note:
   > *"Gridded NASA satellite and reanalysis data represents regional grid cells (~0.5° × 0.5° / ~50km × 50km resolution), not direct on-farm in-situ sensor measurements. Use for regional decision support and agro-climatic context."*
-
-### 5.2 Temporal Coverage & Update Latency
-- **Historical Archive:** Continuous daily records available from **January 1, 1981** onwards.
-- **Near-Real-Time (NRT) Latency:** MERRA-2 and FP-IT assimilation data has a latency of approximately **2 to 5 days** behind real-time. Requests for today's date will not have completed daily records and must be validated before upstream calls.
-
----
-
-## 6. Evaluation of Stretch Data Sources
-
-During initial architecture planning, SMAP and GPM were identified as candidate stretch datasets. Following rigorous evaluation against hackathon delivery constraints and API stability criteria, their status is documented below:
-
-### 6.1 NASA SMAP (Soil Moisture Active Passive)
-- **Product:** L3/L4 Surface and Root-Zone Soil Moisture (e.g., SPL4SMAU).
-- **Access Protocol:** NASA Earthdata Login (OAuth2 Bearer Tokens), NASA CMR API / OPeNDAP / Harmony subsetting services.
-- **Spatial Resolution:** 9 km (Level 4 assimilations) or 36 km (Level 3 radiometer).
-- **Status for MVP:** **Deferred (Stretch Goal Only).** Access requires mandatory Earthdata credentials, binary HDF5/NetCDF file handling, and irregular orbit revisit cycles (2–3 days). To ensure the hackathon MVP remains robust, deterministic, and dependency-light, SMAP integration will be evaluated only as an optional post-MVP enhancement.
-
-### 6.2 NASA GPM IMERG (Global Precipitation Measurement)
-- **Product:** IMERG Early/Late/Final Run (0.1° × 0.1° gridded precipitation).
-- **Access Protocol:** NASA GES DISC with Earthdata credentials.
-- **Status for MVP:** **Deferred (Stretch Goal Only).** While IMERG provides finer spatial resolution than MERRA-2, NASA POWER's `PRECTOTCORR` parameter already incorporates calibrated multi-source precipitation estimates without requiring NASA Earthdata OAuth2 complexity or custom HDF5 processing.
-
----
-
-## 7. Demo Farm Reference Coordinates
-
-For local testing, validation, and the hackathon demonstration, the following agreed farm profile is used:
-- **Farm Identifier:** `farm-peshawar-001`
-- **Location:** Peshawar Valley, Khyber Pakhtunkhwa, Pakistan
-- **Coordinates:** `Latitude: 34.0151° N`, `Longitude: 71.5249° E`
-- **Agro-Ecological Context:** Irrigated alluvial plains of Khyber Pakhtunkhwa; primary seasons are Kharif (summer: maize, rice, sugarcane, pulses) and Rabi (winter: wheat, mustard, chickpea).
-- **Demo Fixture Location:** `data/demo/climate.mock.json`
+- **Demo Data Transparency:** Fallback synthetic fixtures (`data/demo/*.json`) are tagged with `"is_demo_data": true` and surface the HTTP header `X-AgroShift-Data-Mode: demo-fallback`.

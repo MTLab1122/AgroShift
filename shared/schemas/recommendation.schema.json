@@ -1,0 +1,162 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agroshift.incir.internal/schemas/recommendation.schema.json",
+  "title": "RecommendationSet",
+  "description": "Canonical contract for Module 03 Agro Intelligence recommendation outputs in AgroShift.",
+  "type": "object",
+  "required": [
+    "recommendation_id",
+    "farm_id",
+    "generated_at",
+    "input_snapshot",
+    "scenarios",
+    "limitations"
+  ],
+  "properties": {
+    "recommendation_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "farm_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "input_snapshot": {
+      "type": "object",
+      "description": "Snapshot of farm and climate parameters that produced this recommendation."
+    },
+    "scenarios": {
+      "type": "object",
+      "required": ["baseline", "pulse_inclusive", "soil_cover"],
+      "properties": {
+        "baseline": { "$ref": "#/$defs/Scenario" },
+        "pulse_inclusive": { "$ref": "#/$defs/Scenario" },
+        "soil_cover": { "$ref": "#/$defs/Scenario" }
+      },
+      "additionalProperties": false
+    },
+    "limitations": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1,
+      "description": "Mandatory scientific limitations and decision support disclaimers."
+    },
+    "farm_vs_nasa_comparison": {
+      "$ref": "#/$defs/FarmVsNasaComparison"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "FarmVsNasaComparison": {
+      "type": "object",
+      "required": [
+        "observed_rainfall_mm",
+        "expected_crop_water_need_mm",
+        "water_balance_status",
+        "thermal_stress_days",
+        "irrigation_adequacy_note",
+        "data_mode"
+      ],
+      "properties": {
+        "observed_rainfall_mm": {
+          "type": "number",
+          "minimum": 0.0,
+          "description": "Total observed precipitation from NASA POWER over the period."
+        },
+        "expected_crop_water_need_mm": {
+          "type": "number",
+          "minimum": 0.0,
+          "description": "Agronomically expected crop water requirement."
+        },
+        "water_balance_status": {
+          "type": "string",
+          "enum": ["severe_deficit", "moderate_deficit", "balanced", "excess_moisture"]
+        },
+        "thermal_stress_days": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Count of days where NASA T2M_MAX exceeded critical heat stress thresholds."
+        },
+        "irrigation_adequacy_note": {
+          "type": "string"
+        },
+        "data_mode": {
+          "type": "string",
+          "enum": ["live", "demo_fallback", "demo_forced"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "Scenario": {
+      "type": "object",
+      "required": [
+        "scenario_id",
+        "title",
+        "crop_sequence",
+        "seasonal_calendar",
+        "score_breakdown",
+        "rationale",
+        "benefits",
+        "risks",
+        "assumptions"
+      ],
+      "properties": {
+        "scenario_id": { "type": "string" },
+        "title": { "type": "string" },
+        "crop_sequence": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "seasonal_calendar": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["crop", "start_month", "harvest_month"],
+            "properties": {
+              "crop": { "type": "string" },
+              "start_month": { "type": "string" },
+              "harvest_month": { "type": "string" },
+              "duration_days": { "type": "integer" }
+            }
+          }
+        },
+        "score": {
+          "type": ["number", "null"],
+          "minimum": 0.0,
+          "maximum": 100.0
+        },
+        "score_breakdown": {
+          "type": "object",
+          "properties": {
+            "climate_suitability": { "type": "number" },
+            "water_efficiency": { "type": "number" },
+            "soil_health_benefit": { "type": "number" },
+            "market_resilience": { "type": "number" }
+          }
+        },
+        "rationale": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "benefits": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "risks": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "assumptions": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

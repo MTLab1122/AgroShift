@@ -29,7 +29,14 @@ logger = logging.getLogger(__name__)
 NASA_POWER_DAILY_POINT_URL = os.getenv(
     "NASA_POWER_BASE_URL", "https://power.larc.nasa.gov/api/temporal/daily/point"
 )
-DEFAULT_PARAMETERS = ["T2M", "PRECTOTCORR", "RH2M", "ALLSKY_SFC_SW_DWN"]
+DEFAULT_PARAMETERS = [
+    "T2M",
+    "T2M_MAX",
+    "T2M_MIN",
+    "PRECTOTCORR",
+    "RH2M",
+    "ALLSKY_SFC_SW_DWN",
+]
 DEFAULT_TIMEOUT_SECONDS = float(os.getenv("NASA_POWER_TIMEOUT_SECONDS", "20.0"))
 DEFAULT_CACHE_TTL_SECONDS = int(os.getenv("NASA_POWER_CACHE_TTL_SECONDS", "3600"))
 
@@ -215,6 +222,7 @@ class NasaPowerClient:
                 return {
                     "raw_data": cached_entry["data"],
                     "is_cached": True,
+                    "cache_hit": True,
                     "retrieved_at": cached_entry["retrieved_at"],
                     "cache_key": cache_key,
                     "request_meta": {
@@ -256,6 +264,7 @@ class NasaPowerClient:
         return {
             "raw_data": raw_data,
             "is_cached": False,
+            "cache_hit": False,
             "retrieved_at": retrieval_timestamp,
             "cache_key": cache_key,
             "request_meta": {
