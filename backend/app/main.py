@@ -9,14 +9,31 @@ from fastapi import FastAPI, Request, status
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+from sqlalchemy.exc import IntegrityError
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
+from backend.app.modules.agri_intelligence.api import router as agri_intelligence_router
+from backend.app.modules.agri_intelligence.recommendations_api import (
+    router as recommendations_router,
+)
 from backend.app.modules.nasa_data.power_client import NasaPowerClientError
 from backend.app.modules.nasa_data.router import router as nasa_data_router
 from backend.app.modules.nasa_data.schemas import ApiError
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+
+
+def _cors_settings(raw_origins: str) -> tuple[list[str], bool]:
+    origins = [origin.strip() for origin in raw_origins.split(",") if origin.strip()]
+    if not origins:
+        return [], False
+    if origins == ["*"]:
+        return ["*"], False
+    if "*" in origins:
+        raise ValueError("CORS_ORIGINS cannot combine '*' with explicit origins")
+    return origins, True
+
 
 app = FastAPI(
     title="AgroShift Backend API",
@@ -26,18 +43,37 @@ app = FastAPI(
 
 # CORS middleware configurable via environment
 raw_cors = os.getenv("CORS_ORIGINS", "*")
-cors_origins = [o.strip() for o in raw_cors.split(",") if o.strip()] if raw_cors != "*" else ["*"]
+cors_origins, allow_credentials = _cors_settings(raw_cors)
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=cors_origins,
-    allow_credentials=True,
+    allow_credentials=allow_credentials,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
 # Register Module 02 Router
 app.include_router(nasa_data_router)
+app.include_router(agri_intelligence_router)
+app.include_router(recommendations_router)
+
+
+@app.exception_handler(IntegrityError)
+async def handle_database_integrity_error(
+    _request: Request, _exc: IntegrityError
+) -> JSONResponse:
+    """Return a safe conflict response for database constraint violations."""
+    request_id = f"db-{uuid.uuid4().hex[:8]}"
+    logger.warning("Agricultural database constraint conflict [%s]", request_id)
+    return JSONResponse(
+        status_code=status.HTTP_409_CONFLICT,
+        content=ApiError(
+            error_code="DATABASE_CONSTRAINT_CONFLICT",
+            message="The requested record conflicts with database constraints.",
+            request_id=request_id,
+        ).model_dump(),
+    )
 
 
 @app.exception_handler(NasaPowerClientError)
@@ -111,16 +147,20 @@ async def handle_starlette_http_exception(
 
 
 @app.exception_handler(Exception)
-async def handle_generic_exception(request: Request, exc: Exception) -> JSONResponse:
+async def handle_generic_exception(_request: Request, exc: Exception) -> JSONResponse:
     """Catch-all unhandled exception handler ensuring canonical ApiError response."""
     req_id = f"err-{uuid.uuid4().hex[:8]}"
-    logger.exception("Unhandled server exception [%s]: %s", req_id, str(exc))
+    logger.error(
+        "Unhandled server exception [%s] (%s)",
+        req_id,
+        type(exc).__name__,
+    )
     return JSONResponse(
         status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
         content=ApiError(
             error_code="INTERNAL_SERVER_ERROR",
             message="An unexpected internal server error occurred.",
-            details={"exception_type": type(exc).__name__},
+            details=None,
             request_id=req_id,
         ).model_dump(),
     )
