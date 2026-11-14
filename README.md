@@ -160,6 +160,16 @@ npm run lint
 npm run build
 ```
 
+### 7.5 Public Deployment
+
+The frontend is deployed to GitHub Pages by the
+[`Deploy AgroShift to GitHub Pages`](.github/workflows/deploy-pages.yml)
+workflow on pushes to the current default branch (`feature/nasa-data`). See
+[deployment instructions](docs/deployment.md) to enable Pages and connect an
+externally hosted, always-on FastAPI backend. GitHub Actions cannot host the API
+continuously; without a configured API URL, the Pages frontend remains
+accessible but recommendation requests are unavailable.
+
 ---
 
 ## 8. Verified API Endpoints

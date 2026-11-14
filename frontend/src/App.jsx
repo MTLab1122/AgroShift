@@ -5,6 +5,8 @@ import NasaComparisonCard from './components/NasaComparisonCard';
 import RecommendationScenarios from './components/RecommendationScenarios';
 import { AlertCircle, ShieldAlert } from 'lucide-react';
 
+const apiBaseUrl = (import.meta.env.VITE_API_BASE_URL || '').replace(/\/+$/, '');
+
 export default function App() {
   const [health, setHealth] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -14,15 +16,26 @@ export default function App() {
 
   // Check health on load
   useEffect(() => {
-    fetch('/health')
+    if (import.meta.env.PROD && !apiBaseUrl) {
+      setHealth({ status: 'unconfigured' });
+      return;
+    }
+
+    fetch(`${apiBaseUrl}/health`)
       .then(res => res.json())
       .then(data => setHealth(data))
       .catch(err => {
         console.warn('Backend offline or health check failed:', err);
+        setHealth({ status: 'unavailable' });
       });
   }, []);
 
   const handleFarmSubmit = async (formData, forceDemo) => {
+    if (import.meta.env.PROD && !apiBaseUrl) {
+      setError('The API is not configured for this deployment. Set the AGROSHIFT_API_URL repository variable and redeploy.');
+      return;
+    }
+
     setLoading(true);
     setError(null);
 
@@ -31,7 +44,7 @@ export default function App() {
         demo: forceDemo ? 'true' : 'false'
       });
 
-      const response = await fetch(`/api/v1/recommendations/generate?${queryParams.toString()}`, {
+      const response = await fetch(`${apiBaseUrl}/api/v1/recommendations/generate?${queryParams.toString()}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

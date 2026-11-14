@@ -3,6 +3,13 @@ import { Satellite, ShieldCheck, Activity, Globe } from 'lucide-react';
 
 export default function Header({ health, dataMode }) {
   const isHealthy = health?.status === 'healthy';
+  const backendStatus = isHealthy
+    ? 'ONLINE (FastAPI)'
+    : health?.status === 'unconfigured'
+      ? 'NOT CONFIGURED'
+      : health?.status === 'unavailable'
+        ? 'OFFLINE'
+        : 'CHECKING...';
 
   return (
     <header className="glass-card mb-6 px-6 py-4 flex flex-wrap items-center justify-between gap-4 border-b border-slate-800">
@@ -31,7 +38,7 @@ export default function Header({ health, dataMode }) {
           <Activity size={14} className={isHealthy ? "text-emerald-400" : "text-amber-400"} />
           <span>Backend:</span>
           <span className={isHealthy ? "text-emerald-400 font-semibold" : "text-amber-400 font-semibold"}>
-            {isHealthy ? "ONLINE (FastAPI)" : "CHECKING..."}
+            {backendStatus}
           </span>
         </div>
 
