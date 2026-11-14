@@ -11,6 +11,7 @@ export default function App() {
   const [error, setError] = useState(null);
   const [recommendationSet, setRecommendationSet] = useState(null);
   const [activeDataMode, setActiveDataMode] = useState('live');
+  const [activeFarmProfile, setActiveFarmProfile] = useState(null);
 
   // Check health on load
   useEffect(() => {
@@ -25,6 +26,7 @@ export default function App() {
   const handleFarmSubmit = async (formData, forceDemo) => {
     setLoading(true);
     setError(null);
+    setActiveFarmProfile(formData);
 
     try {
       const queryParams = new URLSearchParams({
@@ -84,6 +86,7 @@ export default function App() {
             <NasaComparisonCard
               comparison={recommendationSet.farm_vs_nasa_comparison}
               generatedAt={recommendationSet.generated_at}
+              farmProfile={activeFarmProfile}
             />
 
             <RecommendationScenarios

@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import { MapPin, Sparkles, RefreshCw, Layers, Droplets } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { MapPin, Sparkles, RefreshCw, Layers, Droplets, BookOpen } from 'lucide-react';
 
 export default function FarmForm({ onSubmit, loading, initialData }) {
+  const [registeredFarms, setRegisteredFarms] = useState([]);
   const [formData, setFormData] = useState(initialData || {
     farm_id: 'farm-peshawar-001',
     farm_name: 'Tariq Khan Agro Parcel',
@@ -9,9 +10,9 @@ export default function FarmForm({ onSubmit, loading, initialData }) {
     longitude: 71.5249,
     area_value: 5.0,
     area_unit: 'acres',
-    soil_type: 'loamy',
-    irrigation_type: 'canal',
-    water_availability: 'medium',
+    soil_type: 'sandy',
+    irrigation_type: 'rain_fed',
+    water_availability: 'low',
     current_crop: 'wheat',
     season: 'Rabi',
     crop_history: [
@@ -20,14 +21,31 @@ export default function FarmForm({ onSubmit, loading, initialData }) {
         crop_name: 'maize',
         season: 'Kharif',
         year: 2023,
-        yield_value: 38.0,
+        yield_value: 28.0,
         yield_unit: 'maunds/acre',
-        notes: 'Moderate summer monsoon yield'
+        notes: 'Severe heat during silking'
       }
     ]
   });
 
   const [forceDemo, setForceDemo] = useState(false);
+
+  // Load registered farms on mount
+  useEffect(() => {
+    fetch('/api/v1/farms')
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data)) setRegisteredFarms(data);
+      })
+      .catch(err => console.warn('Could not load farms:', err));
+  }, []);
+
+  const handleSelectRegisteredFarm = (farmId) => {
+    const selected = registeredFarms.find(f => f.farm_id === farmId);
+    if (selected) {
+      setFormData(selected);
+    }
+  };
 
   const handleChange = (e) => {
     const { name, value, type } = e.target;
@@ -115,6 +133,29 @@ export default function FarmForm({ onSubmit, loading, initialData }) {
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-4">
+        {/* Module 01 Farm Selector */}
+        {registeredFarms.length > 0 && (
+          <div className="p-3 bg-slate-900/90 rounded-xl border border-slate-800 flex flex-wrap items-center justify-between gap-3 text-xs">
+            <span className="text-slate-400 font-medium flex items-center gap-1.5">
+              <BookOpen size={14} className="text-emerald-400" />
+              Load Registered Farm (Module 01):
+            </span>
+            <div className="flex items-center gap-2 flex-1 max-w-md">
+              <select
+                value={formData.farm_id}
+                onChange={(e) => handleSelectRegisteredFarm(e.target.value)}
+                className="w-full bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs text-slate-100 focus:outline-none focus:border-emerald-500"
+              >
+                {registeredFarms.map(f => (
+                  <option key={f.farm_id} value={f.farm_id}>
+                    {f.farm_name} ({f.soil_type}, {f.irrigation_type})
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+        )}
+
         {/* Row 1: Coordinates and Name */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>

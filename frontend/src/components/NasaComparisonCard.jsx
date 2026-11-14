@@ -1,7 +1,7 @@
 import React from 'react';
-import { CloudRain, Thermometer, ShieldAlert, CheckCircle2, AlertTriangle, Info, Satellite, Radio } from 'lucide-react';
+import { CloudRain, Thermometer, ShieldAlert, CheckCircle2, AlertTriangle, Info, Satellite, Radio, Download, FileText } from 'lucide-react';
 
-export default function NasaComparisonCard({ comparison, generatedAt }) {
+export default function NasaComparisonCard({ comparison, generatedAt, farmProfile }) {
   if (!comparison) return null;
 
   const {
@@ -14,6 +14,25 @@ export default function NasaComparisonCard({ comparison, generatedAt }) {
   } = comparison;
 
   const coveragePct = Math.min(100, Math.round((observed_rainfall_mm / (expected_crop_water_need_mm || 1)) * 100));
+
+  const csvExportUrl = farmProfile ? `/api/v1/reports/csv?farm_id=${farmProfile.farm_id}&latitude=${farmProfile.latitude}&longitude=${farmProfile.longitude}&demo=${data_mode !== 'live'}` : '#';
+
+  const handleOpenPrintReport = () => {
+    if (!farmProfile) return;
+    const printWindow = window.open('', '_blank');
+    if (!printWindow) return;
+    fetch('/api/v1/reports/pdf', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(farmProfile)
+    })
+      .then(r => r.text())
+      .then(html => {
+        printWindow.document.write(html);
+        printWindow.document.close();
+      })
+      .catch(err => console.error(err));
+  };
 
   // Status badge styling
   const statusConfig = {
@@ -158,6 +177,31 @@ export default function NasaComparisonCard({ comparison, generatedAt }) {
           Agronomic Reconciliation Analysis:
         </strong>
         {irrigation_adequacy_note}
+      </div>
+
+      {/* Module 04 Action Bar: Export CSV & Print Advisory Report */}
+      <div className="flex flex-wrap items-center justify-between gap-3 mb-4 p-3 bg-slate-900/90 rounded-xl border border-slate-800 text-xs">
+        <span className="text-slate-400 font-mono">
+          Module 04 Data Exports:
+        </span>
+        <div className="flex items-center gap-2">
+          <a
+            href={csvExportUrl}
+            download
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-all font-mono"
+          >
+            <Download size={14} className="text-emerald-400" />
+            Export NASA Climate CSV
+          </a>
+          <button
+            type="button"
+            onClick={handleOpenPrintReport}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/40 transition-all font-mono"
+          >
+            <FileText size={14} className="text-emerald-400" />
+            Generate Printable Advisory Report
+          </button>
+        </div>
       </div>
 
       {/* Scientific Honesty Disclaimer Banner */}
